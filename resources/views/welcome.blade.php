@@ -171,11 +171,7 @@
                 <div style="clear: both;"></div>
             </div>
 
-            <!-- ENLACES DE INTERÉS -->
-            <!-- ENLACES DE INTERÉS -->
 
-            <!-- BANNERS -->
-            <!-- FIN BANNERS -->
 
         </main>
 
