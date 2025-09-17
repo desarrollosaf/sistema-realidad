@@ -46,5 +46,20 @@
       </a-entity>
 
     </a-scene>
+
+    <audio id="idioma1" src="{{ asset('images/pleno_sound.mp3') }}"></audio>
+    <audio id="idioma2" src="{{ asset('images/bep.mp3') }}"></audio>
+    <audio id="idioma3" src="{{ asset('images/bep2.mp3') }}"></audio>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const idioma = {!! json_encode($idioma) !!};
+            console.log(idioma);
+            const alarma = document.getElementById("idioma"+idioma);
+            alarma.play();
+        });
+    </script>
+
   </body>
 </html>
