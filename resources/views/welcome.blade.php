@@ -109,7 +109,7 @@
             <div style="text-align: center; padding: 20px; max-width: 100%; box-sizing: border-box;">
 
                 <!-- Imagen responsive -->
-                <img src="https://inesle.gob.mx/assets/images/logo%20inesle%20horizontal_Mesa%20de%20trabajo%201.svg"
+                <img src="{{ asset('images/congreso.png') }}"
                     alt="Ícono Derechos Humanos"
                     style="width: 100%; max-width: 675px; height: auto; margin-bottom: 15px;">
 
@@ -140,28 +140,28 @@
                 <!-- Botones -->
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 0 10px;">
                     <div style="max-width: 100%; width: 100%;">
-                        <a href=""
+                        <a href="{{ route('ar.murales', 1) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
                             Español
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
-                        <a href=""
+                        <a href="{{ route('ar.murales', 2) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
                             Ingles
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
-                        <a href=""
+                        <a href="{{ route('ar.murales', 3) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
                             Lenguaje 1
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
-                        <a href=""
+                        <a href="{{ route('ar.murales', 4) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
                             Lenguaje 2
                         </a>
@@ -186,12 +186,12 @@
                                 style="font-size: 18px; gap: 8px; color: white;">
                                 <a href="https://congresoedomex.gob.mx/" target="_blank"
                                     style="color: white; text-decoration: none;">
-                                    Instituto de Estudios Legislativos
+                                    Poder Legislativo
                                 </a>
                                 <span>|</span>
                                 <a href="https://congresoedomex.gob.mx/" target="_blank"
                                     style="color: white; text-decoration: none;">
-                                    inesle.gob.mx
+                                   congresoedomex.gob.mx
                                 </a>
                             </nav>
                         </div>

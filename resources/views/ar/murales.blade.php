@@ -14,7 +14,7 @@
       
       <a-assets>
         <a-asset-item id="avatarModel" src="https://sistemas.siasaf.gob.mx/aframe/examples/image-tracking/nft/TextMuralDGC.glb"></a-asset-item>
-        <audio id="audio1" src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav"></audio>
+        
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -31,7 +31,7 @@
           src="#avatarModel"
           animation-mixer>
         </a-gltf-model>
-        <a-entity sound="src: #audio1; autoplay: true; loop: true; positional: false"></a-entity>
+      
       </a-entity>
 
       <a-entity mindar-image-target="targetIndex: 1">
@@ -42,7 +42,7 @@
           src="#avatarModel"
           animation-mixer>
         </a-gltf-model>
-        <a-entity sound="src: #audio1; autoplay: true; loop: true; positional: false"></a-entity>
+      
       </a-entity>
 
     </a-scene>
@@ -50,14 +50,20 @@
     <audio id="idioma1" src="{{ asset('images/pleno_sound.mp3') }}"></audio>
     <audio id="idioma2" src="{{ asset('images/bep.mp3') }}"></audio>
     <audio id="idioma3" src="{{ asset('images/bep2.mp3') }}"></audio>
+    <button id="startBtn" style="position:fixed;top:40%;left:40%;padding:20px;font-size:18px;">Iniciar AR</button>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             const idioma = {!! json_encode($idioma) !!};
             console.log(idioma);
-            const alarma = document.getElementById("idioma"+idioma);
-            alarma.play();
+            const btn = document.getElementById('startBtn');
+            btn.addEventListener('click', () => {
+                const idioma = {!! json_encode($idioma) !!};
+                const alarma = document.getElementById("idioma" + idioma);
+                alarma.play(); 
+            });
+
         });
     </script>
 
