@@ -75,7 +75,7 @@
 
 
       $('#menuBtn').click(() => {
-        window.location.href = "{{ route('/') }}"; 
+        window.location.href = "/";
       });
     });
   </script>
