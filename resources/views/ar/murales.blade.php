@@ -3,27 +3,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Overlay arriba */
+ 
     #overlay {
       position: fixed;
-      top: 10px;     
+      top: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      flex-direction: column; /* 🔹 hace que se apilen hacia abajo */
+      flex-direction: row; 
       align-items: center;
-      gap: 10px; /* separación entre botones */
+      gap: 20px; 
       z-index: 9999;
       pointer-events: none;
     }
 
     #overlay button,
     #overlay audio {
-      pointer-events: auto; /* los elementos sí reciben clicks */
+      pointer-events: auto; 
     }
 
-    /* Estilo de los botones */
+
     .button {
       padding: 10px 20px;
       background-color: #94134A;
@@ -33,31 +34,20 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      width: 200px;
+      width: 100px; 
     }
 
     .button:hover {
       background-color: #6e0e37;
     }
-
-    
   </style>
 </head>
 <body>
 
   <div id="overlay">
-    <audio id="m" src="{{ asset('images/pleno_sound.mp3') }}" controls></audio>
+    <button id="menuBtn" class="button"><i class="fa-solid fa-arrow-left"></i></button>
 
-    <button id="audioBtn" class="button">
-      @if($idioma == 1) 
-        Español 
-      @elseif($idioma == 2) 
-        Inglés 
-      @else 
-        Lenguaje 
-      @endif
-    </button>
-    <button id="menuBtn" class="button">Regresar</button>
+    <audio id="audioControl" controls></audio>
   </div>
 
   <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales1718.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
@@ -93,25 +83,24 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
+
       const idioma = {!! json_encode($idioma) !!};
+      const audioControl = document.getElementById("audioControl");
       const alarma = document.getElementById("idioma" + idioma);
-      const alarmaControls = document.getElementById("m");
 
-      $('#audioBtn').click(() => {
-        alarma.play();   
-      });
+      audioControl.src = alarma.src;
 
-      alarma.addEventListener("ended", function() {
-        alarma.play(); 
-      });
-      
-      alarmaControls.addEventListener("ended", function() {
-        alarmaControls.play(); 
+      audioControl.load(); 
+      audioControl.play();
+
+      audioControl.addEventListener("ended", function() {
+        audioControl.play();
       });
 
       $('#menuBtn').click(() => {
         window.location.href = "/";
       });
+
     });
   </script>
 
