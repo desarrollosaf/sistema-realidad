@@ -8,51 +8,60 @@
     /* Overlay arriba */
     #overlay {
       position: fixed;
-      top: 10px;      /* Arriba de la pantalla */
+      top: 10px;     
       left: 50%;
-      transform: translateX(-50%); /* Centra los botones horizontalmente */
+      transform: translateX(-50%);
       display: flex;
-      justify-content: center; /* Centra los botones dentro del contenedor */
-      padding: 10px 20px;
-      z-index: 9999; /* Siempre encima */
-      pointer-events: none; /* Permite tocar solo los botones */
+      flex-direction: column; /* 🔹 hace que se apilen hacia abajo */
+      align-items: center;
+      gap: 10px; /* separación entre botones */
+      z-index: 9999;
+      pointer-events: none;
     }
 
-    #overlay button {
-      pointer-events: auto; /* Los botones sí reciben clicks */
-      padding: 10px 20px;
-      font-size: 16px;
-      opacity: 0.8;
+    #overlay button,
+    #overlay audio {
+      pointer-events: auto; /* los elementos sí reciben clicks */
     }
 
     /* Estilo de los botones */
     .button {
       padding: 10px 20px;
-      background-color: #94134A; /* Verde */
+      background-color: #94134A;
       border: none;
       border-radius: 8px;
       color: white;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 200px;
     }
 
-    /* Efecto cuando pasas el mouse por encima */
     .button:hover {
-      background-color: #94134A;
+      background-color: #6e0e37;
     }
   </style>
 </head>
 <body>
 
-  <div id="overlay" class="button-container">
-    <button id="audioBtn" class="button">@if($idioma == 1) Español @elseif($idioma == 2) Ingles @else Lenguaje @endif</button>
+  <div id="overlay">
+    <audio id="m" src="{{ asset('images/pleno_sound.mp3') }}" controls></audio>
+
+    <button id="audioBtn" class="button">
+      @if($idioma == 1) 
+        Español 
+      @elseif($idioma == 2) 
+        Inglés 
+      @else 
+        Lenguaje 
+      @endif
+    </button>
     <button id="menuBtn" class="button">Regresar</button>
   </div>
 
-  <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets.mind; filterMinCF:0.0001; filterBeta:0.0001"
+  <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets.mind; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB" 
-           renderer="colorManagement: true, physicallyCorrectLights" 
+           renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
            vr-mode-ui="enabled: false" 
            device-orientation-permission-ui="enabled: false">
 
@@ -78,15 +87,25 @@
   <audio id="idioma1" src="{{ asset('images/pleno_sound.mp3') }}"></audio>
   <audio id="idioma2" src="{{ asset('images/bep.mp3') }}"></audio>
   <audio id="idioma3" src="{{ asset('images/bep2.mp3') }}"></audio>
+  <audio id="idioma4" src="{{ asset('images/bep2.mp3') }}"></audio>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
       const idioma = {!! json_encode($idioma) !!};
       const alarma = document.getElementById("idioma" + idioma);
+      const alarmaControls = document.getElementById("m");
 
       $('#audioBtn').click(() => {
         alarma.play();   
+      });
+
+      alarma.addEventListener("ended", function() {
+        alarma.play(); 
+      });
+      
+      alarmaControls.addEventListener("ended", function() {
+        alarmaControls.play(); 
       });
 
       $('#menuBtn').click(() => {
