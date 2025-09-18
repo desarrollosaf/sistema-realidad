@@ -59,7 +59,7 @@
     <button id="menuBtn" class="button">Regresar</button>
   </div>
 
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/targets.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales1718.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB" 
            renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
            vr-mode-ui="enabled: false" 
