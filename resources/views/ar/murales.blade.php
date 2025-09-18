@@ -75,10 +75,11 @@
 
   </a-scene>
 
-  <audio id="idioma1" src="{{ asset('images/pleno_sound.mp3') }}"></audio>
-  <audio id="idioma2" src="{{ asset('images/bep.mp3') }}"></audio>
-  <audio id="idioma3" src="{{ asset('images/bep2.mp3') }}"></audio>
-  <audio id="idioma4" src="{{ asset('images/bep2.mp3') }}"></audio>
+  <audio id="idioma1" src="{{ asset('images/Español_01.mp3') }}"></audio>
+  <audio id="idioma2" src="{{ asset('images/Ingles_01.mp3') }}"></audio>
+  <audio id="idioma3" src="{{ asset('images/Mazahua_01.mp3') }}"></audio>
+  <audio id="idioma4" src="{{ asset('images/Otomi_01.mp3') }}"></audio>
+  <audio id="idioma5" src="{{ asset('images/Nahuatl_01.mp3') }}"></audio>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>

@@ -149,19 +149,26 @@
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.murales', 2) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
-                            Mazahuas
+                            Ingles
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.murales', 3) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
-                            Otomíes
+                            Mazahuas
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.murales', 4) }}"
+                            style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
+                            Otomíes
+                        </a>
+                    </div>
+
+                    <div style="max-width: 100%; width: 100%;">
+                        <a href="{{ route('ar.murales', 5) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
                             Náhuatl
                         </a>
