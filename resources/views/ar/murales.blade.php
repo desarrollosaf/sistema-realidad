@@ -59,14 +59,14 @@
     <button id="menuBtn" class="button">Regresar</button>
   </div>
 
-  <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets.mind; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/targets.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB" 
            renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
            vr-mode-ui="enabled: false" 
            device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <a-asset-item id="avatarModel" src="https://sistemas.siasaf.gob.mx/aframe/examples/image-tracking/nft/TextMuralDGC.glb"></a-asset-item>
+      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/TextMuralDGC.glb') }}"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>

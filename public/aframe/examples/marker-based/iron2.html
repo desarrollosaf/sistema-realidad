@@ -1,0 +1,194 @@
+<!-- Augmented Reality on the Web in 10 lines of html! https://github.com/jeromeetienne/ar.js 
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.6.0/dist/aframe-master.min.js"></script>
+<script src="../../build/aframe-ar.js"></script>
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs renderer='precision: medium;'>
+		<a-marker type="pattern" url="../assets/pattern-ironman.patt">
+			<a-cone position='0 0.5 0' rotation="0 0 0" radius-bottom="0.5" material='opacity: 0.75; color: red;'></a-cone>
+		</a-marker>
+		<a-entity camera></a-entity>
+	</a-scene>
+</body>
+
+https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets2.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="myVideo" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/video.mp4" autoplay loop muted playsinline crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#myVideo" width="1.2" height="0.7" position="0 0 0" rotation="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+
+---------------------------------
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+      AFRAME.registerComponent("video-handler", {
+        init: function () {
+          const video = document.querySelector("#myVideo");
+
+          const unlock = () => {
+            video.play().then(() => {
+              video.pause(); 
+            }).catch(e => console.log("Error al desbloquear video:", e));
+            window.removeEventListener("touchstart", unlock);
+          };
+          window.addEventListener("touchstart", unlock, { once: true });
+
+          this.el.sceneEl.addEventListener("targetFound", () => {
+            video.play();
+          });
+
+          this.el.sceneEl.addEventListener("targetLost", () => {
+            video.pause();
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/mural.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="myVideo" 
+               src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/video2.mp4" 
+               loop 
+               muted 
+               playsinline 
+               preload="auto" 
+               crossorigin="anonymous">
+        </video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" video-handler>
+        <a-video src="#myVideo" width="1.2" height="0.7" position="0 0 0" rotation="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
+    <script>
+      AFRAME.registerComponent("video-handler", {
+        schema: { target: { type: "selector" } },
+        init: function () {
+          const video = this.data.target;
+
+          // Desbloquear video al tocar la pantalla
+          const unlock = () => {
+            video.play().then(() => {
+              video.pause(); // Pausa al principio para evitar el autoplay sin permiso
+            }).catch(e => console.log("Error al desbloquear video:", e));
+            window.removeEventListener("touchstart", unlock);
+          };
+          window.addEventListener("touchstart", unlock, { once: true });
+
+          this.el.addEventListener("targetFound", () => {
+            video.play();
+            // Congelar la transformación cuando la imagen es detectada
+            this.el.setAttribute('lock-transform', 'enabled', true);
+          });
+          this.el.addEventListener("targetLost", () => {
+            video.pause();
+            // Descongelar la transformación cuando la imagen se pierde
+            this.el.setAttribute('lock-transform', 'enabled', false);
+          });
+        }
+      });
+
+      // Componente para congelar la posición y rotación cuando está activo
+      AFRAME.registerComponent('lock-transform', {
+        schema: { enabled: { type: 'boolean', default: false } },
+        init: function () {
+          this.frozenPos = new THREE.Vector3();
+          this.frozenQuat = new THREE.Quaternion();
+          this.isLocked = false;
+        },
+        update: function () {
+          this.isLocked = this.data.enabled;
+          if (this.isLocked) {
+            const obj = this.el.object3D;
+            this.frozenPos.copy(obj.position);
+            this.frozenQuat.copy(obj.quaternion);
+          }
+        },
+        tick: function () {
+          if (this.isLocked) {
+            const obj = this.el.object3D;
+            obj.position.copy(this.frozenPos);
+            obj.quaternion.copy(this.frozenQuat);
+          }
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targetsIC.mind; filterMinCF: 0.01; filterBeta: 20;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video id="video1" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/centro.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Image Target -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Aquí asignamos el video al marcador con el componente lock-transform -->
+        <a-plane material="shader: flat; src: #video1" width="2.1" height="3.1" lock-transform></a-plane>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
+
+
+
+
+
+  
+
+
+

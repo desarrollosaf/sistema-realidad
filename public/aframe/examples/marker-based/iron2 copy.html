@@ -1,0 +1,338 @@
+<!-- Augmented Reality on the Web in 10 lines of html! https://github.com/jeromeetienne/ar.js 
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.6.0/dist/aframe-master.min.js"></script>
+<script src="../../build/aframe-ar.js"></script>
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene embedded arjs renderer='precision: medium;'>
+		<a-marker type="pattern" url="../assets/pattern-ironman.patt">
+			<a-cone position='0 0.5 0' rotation="0 0 0" radius-bottom="0.5" material='opacity: 0.75; color: red;'></a-cone>
+		</a-marker>
+		<a-entity camera></a-entity>
+	</a-scene>
+</body>
+
+https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets2.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="myVideo" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/video.mp4" autoplay loop muted playsinline crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#myVideo" width="1.2" height="0.7" position="0 0 0" rotation="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+
+---------------------------------
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+      AFRAME.registerComponent("video-handler", {
+        init: function () {
+          const video = document.querySelector("#myVideo");
+
+          const unlock = () => {
+            video.play().then(() => {
+              video.pause(); 
+            }).catch(e => console.log("Error al desbloquear video:", e));
+            window.removeEventListener("touchstart", unlock);
+          };
+          window.addEventListener("touchstart", unlock, { once: true });
+
+          this.el.sceneEl.addEventListener("targetFound", () => {
+            video.play();
+          });
+
+          this.el.sceneEl.addEventListener("targetLost", () => {
+            video.pause();
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/mural.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="myVideo" 
+               src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/video2.mp4" 
+               loop 
+               muted 
+               playsinline 
+               preload="auto" 
+               crossorigin="anonymous">
+        </video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" video-handler>
+        <a-video src="#myVideo" width="1.2" height="0.7" position="0 0 0" rotation="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+
+-->
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
+    <script>
+     
+      AFRAME.registerComponent("video-handler", {
+        schema: {
+          target: { type: "selector" }
+        },
+        init: function () {
+          const video = this.data.target;
+
+          const unlock = () => {
+            video.play().then(() => {
+              video.pause();
+            }).catch(e => console.log("Error al desbloquear video:", e));
+            window.removeEventListener("touchstart", unlock);
+          };
+          window.addEventListener("touchstart", unlock, { once: true });
+
+          this.el.addEventListener("targetFound", () => {
+            video.play();
+          });
+
+          this.el.addEventListener("targetLost", () => {
+            video.pause();
+          });
+        }
+      });
+
+      AFRAME.registerComponent("responsive-video", {
+          init: function () {
+            const videoEl = this.el;
+            const aspect = 9 / 16;
+
+            const resize = () => {
+              const screenRatio = window.innerWidth / window.innerHeight;
+              let width, height;
+
+              if (screenRatio < aspect) {
+                width = 1.2;
+                height = width / aspect;
+              } else {
+                height = 2.5;
+                width = height * aspect;
+              }
+
+              videoEl.setAttribute("width", width);
+              videoEl.setAttribute("height", height);
+            };
+
+            window.addEventListener("resize", resize);
+            resize();
+          }
+      });
+    </script>
+  </head>
+
+  <body>
+   <a-scene
+      mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targetsIC.mind; filterMinCF: 0.0002; filterBeta: 3000;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+
+      <a-assets>
+        <video id="video1" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/centro.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+        <video id="video2" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/izquierda.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+        <video id="video3" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/derecha.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+     
+      <a-entity mindar-image-target="targetIndex: 0" video-handler="target: #video2">
+        <!--<a-video src="#video2"  position="-0.4 0 0" rotation="0 30 0"  responsive-video></a-video>-->
+        <a-plane 
+          material="shader: flat; src: #video2" 
+          position="0 0 0" 
+          rotation="0 0 0" 
+          width="0.8" 
+          height="1.4"
+           look-at="[camera]"> 
+        </a-plane>
+      </a-entity>
+
+      
+      <a-entity mindar-image-target="targetIndex: 1" video-handler="target: #video1">
+        <!--<a-video src="#video1"  position="0.4 0 0" rotation="0 -30 0" responsive-video></a-video>-->
+        <a-plane 
+          material="shader: flat; src: #video1" 
+          position="0 0 0" 
+          rotation="0 0 0" 
+          width="0.8" 
+          height="1.4"
+          look-at="[camera]">
+        </a-plane>
+      </a-entity>
+
+      
+      <a-entity mindar-image-target="targetIndex: 2" video-handler="target: #video3">
+        <!--<a-video src="#video3" position="0 0 0" rotation="0 0 0" responsive-video></a-video>-->
+        <a-plane 
+          material="shader: flat; src: #video3" 
+          position="0 0 0" 
+          rotation="0 0 0" 
+          width="0.8" 
+          height="1.4"
+           look-at="[camera]"> 
+        </a-plane>
+      </a-entity>
+  
+    </a-scene>
+  </body>
+</html>
+
+
+
+
+<!-- 
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
+    <script>
+      
+      AFRAME.registerComponent("video-handler", {
+        schema: { target: { type: "selector" } },
+        init: function () {
+          const video = this.data.target;
+
+          const unlock = () => {
+            video.play().then(() => {
+              video.pause();
+            }).catch(e => console.log("Error al desbloquear video:", e));
+            window.removeEventListener("touchstart", unlock);
+          };
+          window.addEventListener("touchstart", unlock, { once: true });
+
+          this.el.addEventListener("targetFound", () => { video.play(); });
+          this.el.addEventListener("targetLost", () => { video.pause(); });
+        }
+      });
+
+      
+      AFRAME.registerComponent('dead-zone', {
+        schema: { 
+          threshold: { type: 'number', default: 0.01 },   // umbral para aplicar suavizado
+          lerpFactor: { type: 'number', default: 0.5 }   // factor de interpolación (0 a 1)
+        },
+        init: function () {
+          this.lastPos = new THREE.Vector3();
+          this.lastRot = new THREE.Euler();
+          this.firstUpdate = true;
+        },
+        tick: function () {
+          const obj = this.el.object3D;
+
+          if (this.firstUpdate) {
+            this.lastPos.copy(obj.position);
+            this.lastRot.copy(obj.rotation);
+            this.firstUpdate = false;
+            return;
+          }
+
+          const deltaPos = obj.position.clone().sub(this.lastPos).length();
+          const deltaRot = Math.abs(obj.rotation.x - this.lastRot.x) +
+                          Math.abs(obj.rotation.y - this.lastRot.y) +
+                          Math.abs(obj.rotation.z - this.lastRot.z);
+
+          if (deltaPos > this.data.threshold || deltaRot > 0.002) {
+            // Mueve suavemente desde la última posición/rotación hacia la actual
+            this.lastPos.lerp(obj.position, this.data.lerpFactor);
+            this.lastRot.x += (obj.rotation.x - this.lastRot.x) * this.data.lerpFactor;
+            this.lastRot.y += (obj.rotation.y - this.lastRot.y) * this.data.lerpFactor;
+            this.lastRot.z += (obj.rotation.z - this.lastRot.z) * this.data.lerpFactor;
+
+            obj.position.copy(this.lastPos);
+            obj.rotation.copy(this.lastRot);
+          } else {
+            // Si el cambio es muy pequeño, mantiene la última posición y rotación suavizada
+            obj.position.copy(this.lastPos);
+            obj.rotation.copy(this.lastRot);
+          }
+        }
+      });
+
+    </script>
+  </head>
+
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targetsIC.mind; filterMinCF: 0.0001; filterBeta: 10;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video id="video1" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/centro.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+        <video id="video2" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/izquierda.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+        <video id="video3" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/derecha.mp4" loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+ 
+      <a-entity mindar-image-target="targetIndex: 0" video-handler="target: #video2">
+        <a-plane material="shader: flat; src: #video2" width="1.8" height="2.8" dead-zone></a-plane>
+      </a-entity>
+
+
+      <a-entity mindar-image-target="targetIndex: 1" video-handler="target: #video1">
+        <a-plane material="shader: flat; src: #video1" width="1.8" height="2.8" dead-zone></a-plane>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2" video-handler="target: #video3">
+        <a-plane material="shader: flat; src: #video3" width="1.8" height="2.8" dead-zone></a-plane>
+      </a-entity>
+  
+    </a-scene>
+  </body>
+</html>
+
+
+
+-->

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MindAR Video sobre Imagen</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      canvas { width: 100%; height: 100% }
+    </style>
+  </head>
+  <body>
+    <video id="video" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/centro.mp4" loop playsinline style="display: none;"></video>
+
+    <script>
+  const mindarThree = new window.MINDAR.IMAGE.MindARThree({
+    container: document.body,
+    imageTargetSrc: "https://sistemas.siasaf.gob.mx/aframe/examples/assets/targetsReducido.mind",
+  });
+
+  const { renderer, scene, camera } = mindarThree;
+
+  const anchor = mindarThree.addAnchor(0);
+
+  const video = document.querySelector("#video");
+  const texture = new THREE.VideoTexture(video);
+
+  const geometry = new THREE.PlaneGeometry(1, 0.5625); // 16:9 aspect ratio
+  const material = new THREE.MeshBasicMaterial({ map: texture });
+  const videoMesh = new THREE.Mesh(geometry, material);
+
+  anchor.group.add(videoMesh);
+
+  // Variables para suavizado
+  const smoothingFactor = 0.15;
+  const currentPosition = new THREE.Vector3();
+  const currentQuaternion = new THREE.Quaternion();
+
+  anchor.onTargetFound = () => { video.play(); };
+  anchor.onTargetLost = () => { video.pause(); };
+
+  mindarThree.start().then(() => {
+    renderer.setAnimationLoop(() => {
+      if (anchor.group.visible) {
+        currentPosition.lerp(anchor.group.position, smoothingFactor);
+        currentQuaternion.slerp(anchor.group.quaternion, smoothingFactor);
+        videoMesh.position.copy(currentPosition);
+        videoMesh.quaternion.copy(currentQuaternion);
+      }
+      renderer.render(scene, camera);
+    });
+  });
+</script>
+  </body>
+</html>

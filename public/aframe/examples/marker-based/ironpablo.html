@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AR Mural con Modelo Personalizado</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  #videoCam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+  }
+  #videoMural {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    pointer-events: none;
+  }
+  #canvas {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<video id="videoCam" autoplay playsinline></video>
+<video id="videoMural" src="https://sistemas.siasaf.gob.mx/aframe/examples/assets/centro.mp4" autoplay loop muted></video>
+<canvas id="canvas" width="224" height="224"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+<script>
+let model, metadata;
+
+async function init() {
+  // 1️⃣ Cargar tu modelo personalizado
+  model = await tf.loadLayersModel("https://sistemas.siasaf.gob.mx/aframe/examples/assets/model.json");
+  const response = await fetch("https://sistemas.siasaf.gob.mx/aframe/examples/assets/metadata.json");
+  metadata = await response.json();
+  console.log("Modelo y metadata cargados");
+
+  // 2️⃣ Configurar cámara
+  const videoCam = document.getElementById("videoCam");
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+    videoCam.srcObject = stream;
+  } catch (err) {
+    alert("No se pudo acceder a la cámara: " + err);
+    return;
+  }
+
+  videoCam.addEventListener("loadeddata", predictLoop);
+}
+
+async function predictLoop() {
+  const videoCam = document.getElementById("videoCam");
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const videoMural = document.getElementById("videoMural");
+
+  async function loop() {
+    const videoWidth = videoCam.videoWidth;
+    const videoHeight = videoCam.videoHeight;
+
+    // Dividir la cámara en secciones (por ejemplo 3x3)
+    const sections = [];
+    const rows = 3;
+    const cols = 3;
+    const sectionW = videoWidth / cols;
+    const sectionH = videoHeight / rows;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        sections.push({ x: c * sectionW, y: r * sectionH, w: sectionW, h: sectionH });
+      }
+    }
+
+    let detectedBox = null;
+
+    for (let sec of sections) {
+      ctx.drawImage(videoCam, sec.x, sec.y, sec.w, sec.h, 0, 0, canvas.width, canvas.height);
+      let tensor = tf.browser.fromPixels(canvas).toFloat().div(255.0).expandDims(0);
+      let prediction = await model.predict(tensor).data();
+      let maxIndex = prediction.indexOf(Math.max(...prediction));
+      let label = metadata.labels[maxIndex];
+      let score = prediction[maxIndex];
+
+      if (label === "mural" && score > 0.8) {
+        // Guardar la sección donde detectamos mural
+        detectedBox = sec;
+        break; // usamos la primera sección detectada
+      }
+    }
+
+    if (detectedBox) {
+      // Ajustar videoMural sobre la sección detectada
+      const scaleX = videoCam.clientWidth / videoCam.videoWidth;
+      const scaleY = videoCam.clientHeight / videoCam.videoHeight;
+
+      videoMural.style.left = detectedBox.x * scaleX + "px";
+      videoMural.style.top = detectedBox.y * scaleY + "px";
+      videoMural.style.width = detectedBox.w * scaleX + "px";
+      videoMural.style.height = detectedBox.h * scaleY + "px";
+      videoMural.style.display = "block";
+
+      if (videoMural.paused) videoMural.play();
+    } else {
+      videoMural.style.display = "none";
+      videoMural.pause();
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+init();
+</script>
+</body>
+</html>
