@@ -57,7 +57,7 @@
            device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/Sin_nombre.glb') }}"></a-asset-item>
+      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/TextMuralDGC.glb') }}"></a-asset-item>
     </a-assets>
     
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
