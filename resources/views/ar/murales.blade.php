@@ -92,7 +92,12 @@
       audioControl.src = alarma.src;
 
       audioControl.load(); 
-      audioControl.play();
+      const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
+
+      target.addEventListener("targetFound", () => {
+        console.log("Target detectado ✅");
+        audioControl.play();
+      });
 
       audioControl.addEventListener("ended", function() {
         audioControl.play();
