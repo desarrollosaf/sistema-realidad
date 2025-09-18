@@ -11,6 +11,7 @@ class ARController extends Controller
     }
 
     public function muralesQR(){
-        return view("ar.qr");
+        $idioma = 1;
+        return view("ar.qr", compact("idioma"));
     }
 }
