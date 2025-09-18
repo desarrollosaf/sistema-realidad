@@ -51,7 +51,7 @@
       @if($idioma == 1) 
         Español 
       @elseif($idioma == 2) 
-        Inglés 
+        Inglés  
       @else 
         Lenguaje 
       @endif
@@ -75,11 +75,11 @@
     <a-entity light="type: ambient; intensity: 0.5"></a-entity>
 
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model rotation="0 0 0" position="-0.5 -0.6 0.1" scale="0.5 0.5 0.5" src="#avatarModel" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0" position="-0.5 -0.6 0.1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-gltf-model rotation="0 0 0" position="-0.5 -0.6 0.1" scale="0.5 0.5 0.5" src="#avatarModel" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0" position="-0.5 -0.6 0.1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
     </a-entity>
 
   </a-scene>
