@@ -8,29 +8,46 @@
     /* Overlay arriba */
     #overlay {
       position: fixed;
-      top: 10px;      /* arriba de la pantalla */
-      left: 0;
-      width: 100%;
+      top: 10px;      /* Arriba de la pantalla */
+      left: 50%;
+      transform: translateX(-50%); /* Centra los botones horizontalmente */
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Centra los botones dentro del contenedor */
       padding: 10px 20px;
-      z-index: 9999; /* siempre encima */
-      pointer-events: none; /* permite tocar solo los botones */
+      z-index: 9999; /* Siempre encima */
+      pointer-events: none; /* Permite tocar solo los botones */
     }
+
     #overlay button {
-      pointer-events: auto; /* los botones sí reciben clicks */
-      padding: 10px 15px;
+      pointer-events: auto; /* Los botones sí reciben clicks */
+      padding: 10px 20px;
       font-size: 16px;
       opacity: 0.8;
+    }
+
+    /* Estilo de los botones */
+    .button {
+      padding: 10px 20px;
+      background-color: #94134A; /* Verde */
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Efecto cuando pasas el mouse por encima */
+    .button:hover {
+      background-color: #94134A;
     }
   </style>
 </head>
 <body>
 
-
-  <div id="overlay">
-    <button id="audioBtn">🔊 Sonido</button>
-    <button id="menuBtn">🏠 Menú</button>
+  <div id="overlay" class="button-container">
+    <button id="audioBtn" class="button">@if($idioma == 1) Español @elseif($idioma == 2) Ingles @else Lenguaje @endif</button>
+    <button id="menuBtn" class="button">Regresar</button>
   </div>
 
   <a-scene mindar-image="imageTargetSrc: https://sistemas.siasaf.gob.mx/aframe/examples/assets/targets.mind; filterMinCF:0.0001; filterBeta:0.0001"
@@ -58,7 +75,6 @@
 
   </a-scene>
 
-  
   <audio id="idioma1" src="{{ asset('images/pleno_sound.mp3') }}"></audio>
   <audio id="idioma2" src="{{ asset('images/bep.mp3') }}"></audio>
   <audio id="idioma3" src="{{ asset('images/bep2.mp3') }}"></audio>
@@ -72,7 +88,6 @@
       $('#audioBtn').click(() => {
         alarma.play();   
       });
-
 
       $('#menuBtn').click(() => {
         window.location.href = "/";
