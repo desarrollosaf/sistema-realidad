@@ -75,11 +75,11 @@
     <a-entity light="type: ambient; intensity: 0.5"></a-entity>
 
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model rotation="0 0 0" position="1 1 1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0" position="-0.5 1 1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-gltf-model rotation="0 0 0" position="1 1 1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0" position="-0.5 1 1" scale="2 2 2" src="#avatarModel" animation-mixer></a-gltf-model>
     </a-entity>
 
   </a-scene>
