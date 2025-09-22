@@ -92,7 +92,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
-      /*const idioma = {!! json_encode($idioma) !!};
+      const idioma = {!! json_encode($idioma) !!};
       const alarma = document.getElementById("idioma" + idioma);
       const alarmaControls = document.getElementById("m");
 
@@ -102,13 +102,8 @@
 
       alarma.addEventListener("ended", function() {
         alarma.play(); 
-      });*/
-      
-      const alarmaControls = document.getElementById("m");
-      $('#audioBtn').click(() => {
-        alarmaControls.play();   
       });
-
+      
       alarmaControls.addEventListener("ended", function() {
         alarmaControls.play(); 
       });
