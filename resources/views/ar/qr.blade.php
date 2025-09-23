@@ -50,7 +50,7 @@
     <audio id="audioControl" controls></audio>
   </div>
 
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/qr.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/qr.mind') }}; filterMinCF:0.001; filterBeta:0.001;"
            color-space="sRGB" 
            renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
            vr-mode-ui="enabled: false" 
