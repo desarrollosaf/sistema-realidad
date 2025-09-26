@@ -56,10 +56,6 @@
            vr-mode-ui="enabled: false" 
            device-orientation-permission-ui="enabled: false">
 
-    <a-assets>
-      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/TextMuralDGC2.glb') }}"></a-asset-item>
-    </a-assets>
-    
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
     <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
