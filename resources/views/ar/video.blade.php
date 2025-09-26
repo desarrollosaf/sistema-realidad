@@ -44,12 +44,13 @@
 </head>
 <body>
 
+  <!-- CONTROLES SUPERIORES -->
   <div id="overlay">
     <button id="menuBtn" class="button"><i class="fa-solid fa-arrow-left"></i></button>
-
     <audio id="audioControl" controls></audio>
   </div>
 
+  <!-- ESCENA A-FRAME -->
   <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales1718.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB" 
            renderer="colorManagement: true, physicallyCorrectLights" 
@@ -57,57 +58,72 @@
            device-orientation-permission-ui="enabled: false">
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
     <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
     <a-entity light="type: ambient; intensity: 0.5"></a-entity>
 
-    <a-entity mindar-image-target="targetIndex: 0">
-      <div id="customModal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center;">
-        <div style="background:#fff; padding:20px; border-radius:10px; max-width:90%; text-align:center;">
-          <h2>¡Marcador detectado!</h2>
-          <p>Este es el contenido del modal personalizado.</p>
-          <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
-        </div>
-      </div>
-    </a-entity>
+    <!-- Target 0: SOLO DISPARA MODAL -->
+    <a-entity mindar-image-target="targetIndex: 0"></a-entity>
 
+    <!-- Target 1: puede tener modelo si quieres -->
     <a-entity mindar-image-target="targetIndex: 1">
-      <div id="customModal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center;">
-        <div style="background:#fff; padding:20px; border-radius:10px; max-width:90%; text-align:center;">
-          <h2>¡Marcador detectado!</h2>
-          <p>Este es el contenido del modal personalizado.</p>
-          <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
-        </div>
-      </div>
+      <!-- podrías poner glTF aquí -->
     </a-entity>
 
   </a-scene>
 
+  <!-- ✅ MODAL FUERA DE LA ESCENA -->
+  <div id="customModal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: sans-serif;
+  ">
+    <div style="background: #fff; padding: 20px; border-radius: 10px; color: black; text-align: center;">
+      <h2>¡Marcador detectado!</h2>
+      <p>Este es el contenido del modal personalizado.</p>
+      <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- AUDIOS -->
   <audio id="idioma1" src="{{ asset('images/Español_01.mp3') }}"></audio>
   <audio id="idioma2" src="{{ asset('images/Ingles_01.mp3') }}"></audio>
   <audio id="idioma3" src="{{ asset('images/Mazahua_01.mp3') }}"></audio>
   <audio id="idioma4" src="{{ asset('images/Otomi_01.mp3') }}"></audio>
   <audio id="idioma5" src="{{ asset('images/Nahuatl_01.mp3') }}"></audio>
 
+  <!-- SCRIPTS -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
-
       const idioma = {!! json_encode($idioma) !!};
       const audioControl = document.getElementById("audioControl");
       const alarma = document.getElementById("idioma" + idioma);
+      const modal = document.getElementById("customModal");
 
       audioControl.src = alarma.src;
+      audioControl.load();
 
-      audioControl.load(); 
       const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
 
-      target.addEventListener("targetFound", () => {
-        console.log("Target detectado ");
-        audioControl.play();
-      });
+      if (target) {
+        target.addEventListener("targetFound", () => {
+          console.log("Target detectado");
+          modal.style.display = "flex";
+          audioControl.play();
+        });
+      }
 
-      audioControl.addEventListener("ended", function() {
+      audioControl.addEventListener("ended", function () {
         audioControl.play();
       });
 
@@ -115,13 +131,12 @@
         window.location.href = "/";
       });
 
-      function closeModal() {
-        document.getElementById("customModal").style.display = "none";
+      window.closeModal = function () {
+        modal.style.display = "none";
         audioControl.pause();
       }
-
     });
   </script>
-
 </body>
+
 </html>
