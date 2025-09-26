@@ -71,7 +71,6 @@
 
   </a-scene>
 
-  <!-- ✅ MODAL FUERA DE LA ESCENA -->
   <div id="customModal" style="
     display: none;
     position: fixed;
@@ -89,7 +88,7 @@
   ">
     <div style="background: #fff; padding: 20px; border-radius: 10px; color: black; text-align: center;">
       <h2>¡Marcador detectado!</h2>
-      <p>Este es el contenido del modal personalizado.</p>
+      <p>Contenido.</p>
       <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
     </div>
   </div>
