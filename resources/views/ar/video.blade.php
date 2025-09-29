@@ -42,7 +42,7 @@
     }
 
     .modal-video {
-      width: 300px;
+      width: 500px;
       height: auto;
       border-radius: 10px;
       margin-top: 10px;
@@ -104,7 +104,7 @@
         loop 
         controls>
       </video>
-      
+
       <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
     </div>  
   </div>
