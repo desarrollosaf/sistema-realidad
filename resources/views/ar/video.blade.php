@@ -59,11 +59,12 @@
       height: 100vh;
       background: rgba(0, 0, 0, 0.8);
       z-index: 99999;
-      justify-content: center;
-      align-items: center;
+      overflow-y: auto;
+      display: flex;
       flex-direction: column;
-      color: white;
-      font-family: sans-serif;
+      align-items: center;
+      padding-top: 60px; 
+      box-sizing: border-box;
     }
 
     .modal-container {
