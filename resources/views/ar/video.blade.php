@@ -88,13 +88,13 @@
   ">
     <div style="background: #fff; padding: 20px; border-radius: 10px; color: black; text-align: center;">
       <h2>¡Marcador detectado!</h2>
-      <p>Contenido.</p>
+      <video src="{{ asset('images/Español_01.mp3') }}" autoplay muted loop></video>
       <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
     </div>
   </div>
 
   <!-- AUDIOS -->
-  <audio id="idioma1" src="{{ asset('images/Español_01.mp3') }}"></audio>
+  <audio id="idioma1" src="{{ asset('aframe/examples/assets/centro.mp4') }}"></audio>
   <audio id="idioma2" src="{{ asset('images/Ingles_01.mp3') }}"></audio>
   <audio id="idioma3" src="{{ asset('images/Mazahua_01.mp3') }}"></audio>
   <audio id="idioma4" src="{{ asset('images/Otomi_01.mp3') }}"></audio>
