@@ -42,10 +42,21 @@
     }
 
     .modal-video {
-      width: 400px;
+      width: 100%;
       height: auto;
       border-radius: 10px;
       margin-top: 10px;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      color: black;
+      text-align: center;
+      max-width: 90vw;
+      width: 400px;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -78,21 +89,7 @@
 
   </a-scene>
 
-  <div id="customModal" style="
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.8);
-    z-index: 99999;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    font-family: sans-serif;
-  ">
+  <div id="customModal" class="modal-content">
     <div style="background: #fff; padding: 20px; border-radius: 10px; color: black; text-align: center;">
       <!--<h2>¡Marcador detectado!</h2>-->
       <video 
