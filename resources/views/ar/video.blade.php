@@ -42,7 +42,7 @@
     }
 
     .modal-video {
-      width: 500px;
+      width: 400px;
       height: auto;
       border-radius: 10px;
       margin-top: 10px;
