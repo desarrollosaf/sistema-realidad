@@ -94,7 +94,7 @@
     font-family: sans-serif;
   ">
     <div style="background: #fff; padding: 20px; border-radius: 10px; color: black; text-align: center;">
-      <h2>¡Marcador detectado!</h2>
+      <!--<h2>¡Marcador detectado!</h2>-->
       <video src="{{ asset('aframe/examples/assets/centro.mp4') }}" autoplay muted loop class="modal-video"></video>
       <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
     </div>
