@@ -83,6 +83,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    bottom: 0
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.8);
@@ -104,7 +105,7 @@
         loop 
         controls>
       </video>
-
+      <br>
       <button onclick="closeModal()" style="padding:10px 20px; background:#94134A; color:white; border:none; border-radius:5px;">Cerrar</button>
     </div>  
   </div>
