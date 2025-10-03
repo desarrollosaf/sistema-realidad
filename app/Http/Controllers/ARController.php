@@ -19,4 +19,8 @@ class ARController extends Controller
         $idioma = 1;
         return view("ar.video", compact("idioma"));
     }
+
+    public function muralesAR(){
+        return view("ar.ra");
+    }
 }
