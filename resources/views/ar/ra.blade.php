@@ -10,7 +10,7 @@
     <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/muralCOLOR.mind') }}; filterMinCF:0.001; filterBeta:0.001;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" >
       <a-assets>
         <a-asset-item id="bearModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
-        <a-asset-item id="raccoonModel" src="{{ asset('aframe/examples/image-tracking/nft/Sin_nombre_D.gltf') }}"></a-asset-item>
+        <a-asset-item id="raccoonModel" src="{{ asset('aframe/examples/image-tracking/nft/Sin_nombre_E.gltf') }}"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
