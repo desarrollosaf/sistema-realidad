@@ -147,6 +147,7 @@
       const audioControl = document.getElementById("audioControl");
       const alarma = document.getElementById("idioma" + idioma);
       const modal = document.getElementById("customModal");
+      modal.style.display = "none";
 
       audioControl.src = alarma.src;
       audioControl.load();
@@ -154,6 +155,7 @@
       const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
 
       if (target) {
+        console.log('holaaa target')
         target.addEventListener("targetFound", () => {
           console.log("Target detectado");
           modal.style.display = "flex";
