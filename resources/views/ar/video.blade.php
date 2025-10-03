@@ -84,6 +84,12 @@
       border-radius: 10px;
       margin-top: 10px;
     }
+
+    /* En lugar de display: none, usa la clase .hidden */
+#customModal.hidden {
+  display: none;
+}
+
   </style>
 </head>
 
@@ -116,7 +122,7 @@
   </a-scene>
 
   <!-- MODAL -->
-  <div id="customModal">
+  <div id="customModal" class="hidden">
     <div class="modal-container">
       <video 
         src="{{ asset('aframe/examples/assets/centro.mp4') }}" 
@@ -147,7 +153,7 @@
       const audioControl = document.getElementById("audioControl");
       const alarma = document.getElementById("idioma" + idioma);
       const modal = document.getElementById("customModal");
-      modal.style.display = "none";
+      modal.classList.add('hidden');
 
       audioControl.src = alarma.src;
       audioControl.load();
@@ -158,6 +164,7 @@
         console.log('holaaa target')
         target.addEventListener("targetFound", () => {
           console.log("Target detectado");
+          modal.classList.remove('hidden');
           modal.style.display = "flex";
           audioControl.play();
         });
@@ -173,6 +180,7 @@
 
       window.closeModal = function () {
         modal.style.display = "none";
+        modal.classList.add('hidden');
         audioControl.pause();
       }
     });
