@@ -20,7 +20,7 @@ class ARController extends Controller
         return view("ar.video", compact("idioma"));
     }
 
-    public function muralesAR(){
+    public function muralesRA(){
         return view("ar.ra");
     }
 }
