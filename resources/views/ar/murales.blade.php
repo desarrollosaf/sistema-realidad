@@ -49,15 +49,15 @@
 
     <audio id="audioControl" controls></audio>
   </div>
-
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales1718.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <!-- murales 1718 -->
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/prueba_lateral_derecho.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB" 
            renderer="colorManagement: true, physicallyCorrectLights" 
            vr-mode-ui="enabled: false" 
            device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/PROP_DGCS.gltf') }}"></a-asset-item>
+      <a-asset-item id="avatarModel" src="{{ asset('aframe/examples/image-tracking/nft/PROP_DGCS_A.gltf') }}"></a-asset-item>
     </a-assets>
     
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
