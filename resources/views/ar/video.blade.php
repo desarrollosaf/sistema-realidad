@@ -98,7 +98,7 @@
   <!-- CONTROLES SUPERIORES -->
   <div id="overlay">
     <button id="menuBtn" class="button"><i class="fa-solid fa-arrow-left"></i></button>
-    <audio id="audioControl" controls></audio>
+    <!--<audio id="audioControl" controls></audio>-->
   </div>
 
   <!-- ESCENA A-FRAME -->
@@ -125,7 +125,7 @@
   <div id="customModal" class="hidden">
     <div class="modal-container">
       <video 
-        src="{{ asset('aframe/examples/assets/centro.mp4') }}" 
+        src="{{ asset('aframe/examples/assets/videoDGCS.mp4') }}" 
         class="modal-video"
         autoplay 
         muted 
@@ -150,13 +150,13 @@
   <script>
     $(document).ready(function () {
       const idioma = {!! json_encode($idioma) !!};
-      const audioControl = document.getElementById("audioControl");
+      //const audioControl = document.getElementById("audioControl");
       const alarma = document.getElementById("idioma" + idioma);
       const modal = document.getElementById("customModal");
       modal.classList.add('hidden');
 
-      audioControl.src = alarma.src;
-      audioControl.load();
+      //audioControl.src = alarma.src;
+      //audioControl.load();
 
       const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
 
@@ -166,13 +166,13 @@
           console.log("Target detectado");
           modal.classList.remove('hidden');
           modal.style.display = "flex";
-          audioControl.play();
+          //audioControl.play();
         });
       }
 
-      audioControl.addEventListener("ended", function () {
+      /*audioControl.addEventListener("ended", function () {
         audioControl.play();
-      });
+      });*/
 
       $('#menuBtn').click(() => {
         window.location.href = "/";
@@ -181,7 +181,7 @@
       window.closeModal = function () {
         modal.style.display = "none";
         modal.classList.add('hidden');
-        audioControl.pause();
+        //audioControl.pause();
       }
     });
   </script>
