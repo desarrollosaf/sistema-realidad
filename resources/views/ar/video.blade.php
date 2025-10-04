@@ -79,11 +79,13 @@
     }
 
     .modal-video {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
+  width: 70%; /* Reduce el tamaño relativo */
+  max-width: 300px; /* Máximo tamaño absoluto */
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
 
     /* En lugar de display: none, usa la clase .hidden */
 #customModal.hidden {
