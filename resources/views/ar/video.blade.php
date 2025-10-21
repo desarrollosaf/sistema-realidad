@@ -104,7 +104,7 @@
   </div>
 
   <!-- ESCENA A-FRAME -->
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales1718.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/vestibulo.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB"
            renderer="colorManagement: true, physicallyCorrectLights"
            vr-mode-ui="enabled: false"
@@ -118,9 +118,7 @@
     <a-entity mindar-image-target="targetIndex: 0"></a-entity>
 
     <!-- Target 1: puede tener modelo si quieres -->
-    <a-entity mindar-image-target="targetIndex: 1">
-      <!-- podrías poner glTF aquí -->
-    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 1"></a-entity>
   </a-scene>
 
   <!-- MODAL -->
@@ -160,11 +158,22 @@
       //audioControl.src = alarma.src;
       //audioControl.load();
 
-      const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
+      const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
+      const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
 
-      if (target) {
-        console.log('holaaa target')
-        target.addEventListener("targetFound", () => {
+      if (target0) {
+        console.log('holaaa target 0')
+        target0.addEventListener("targetFound", () => {
+          console.log("Target detectado");
+          modal.classList.remove('hidden');
+          modal.style.display = "flex";
+          //audioControl.play();
+        });
+      }
+
+       if (target1) {
+        console.log('holaaa target 1')
+        target1.addEventListener("targetFound", () => {
           console.log("Target detectado");
           modal.classList.remove('hidden');
           modal.style.display = "flex";

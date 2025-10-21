@@ -15,8 +15,7 @@ class ARController extends Controller
         return view("ar.qr", compact("idioma"));
     }
 
-    public function muralesVD(){
-        $idioma = 1;
+    public function muralesVD($idioma){
         return view("ar.video", compact("idioma"));
     }
 
