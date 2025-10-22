@@ -168,6 +168,11 @@
           modal.classList.remove('hidden');
           modal.style.display = "flex";
           //audioControl.play();
+
+          const video = modal.querySelector('video');
+          video.muted = false;
+          video.play();
+
         });
       }
 
@@ -178,6 +183,10 @@
           modal.classList.remove('hidden');
           modal.style.display = "flex";
           //audioControl.play();
+
+          const video = modal.querySelector('video');
+          video.muted = false;
+          video.play();
         });
       }
 
