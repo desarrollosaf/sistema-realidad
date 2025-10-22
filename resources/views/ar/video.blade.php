@@ -127,7 +127,8 @@
       <video 
         src="{{ asset('aframe/examples/assets/videoDGCS.mp4') }}" 
         class="modal-video"
-        autoplay  
+        autoplay 
+        muted 
         playsinline 
         loop 
         controls>
