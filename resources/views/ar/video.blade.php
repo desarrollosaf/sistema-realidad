@@ -148,6 +148,12 @@
   <!-- SCRIPT -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    const targetVideos = {
+      0: "{{ asset('aframe/examples/assets/videoDGCS.mp4') }}",
+      1: "{{ asset('aframe/examples/assets/otroVideo.mp4') }}"
+     
+    };
+
     $(document).ready(function () {
       const idioma = {!! json_encode($idioma) !!};
       //const audioControl = document.getElementById("audioControl");
@@ -163,7 +169,8 @@
 
       if (target0) {
         console.log('holaaa target 0')
-        target0.addEventListener("targetFound", () => {
+        target0.addEventListener("targetFound", () => handleTargetFound(0));
+        /*target0.addEventListener("targetFound", () => {
           console.log("Target detectado");
           modal.classList.remove('hidden');
           modal.style.display = "flex";
@@ -173,12 +180,13 @@
           video.muted = false;
           video.play();
 
-        });
+        });*/
       }
 
        if (target1) {
         console.log('holaaa target 1')
-        target1.addEventListener("targetFound", () => {
+        target1.addEventListener("targetFound", () => handleTargetFound(1));
+        /*target1.addEventListener("targetFound", () => {
           console.log("Target detectado");
           modal.classList.remove('hidden');
           modal.style.display = "flex";
@@ -187,7 +195,25 @@
           const video = modal.querySelector('video');
           video.muted = false;
           video.play();
-        });
+        });*/
+      }
+
+      function handleTargetFound(targetIndex) {
+        const videoSrc = targetVideos[targetIndex];
+        if (!videoSrc) return;
+
+        const modal = document.getElementById("customModal");
+        const video = modal.querySelector("video");
+
+        // Cambiar el src dinámicamente
+        video.src = videoSrc;
+        video.muted = false;
+        video.load(); // Carga el nuevo video
+        video.play(); // Reproduce
+
+        // Mostrar el modal
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
       }
 
       /*audioControl.addEventListener("ended", function () {
@@ -201,6 +227,10 @@
       window.closeModal = function () {
         modal.style.display = "none";
         modal.classList.add('hidden');
+        const video = modal.querySelector("video");
+
+          video.pause();
+          video.src = "";
         //audioControl.pause();
       }
     });
