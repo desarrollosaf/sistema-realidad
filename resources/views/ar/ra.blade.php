@@ -1,26 +1,82 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="es">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <meta charset="UTF-8" />
+    <title>Texto en mural - MindAR</title>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+      }
+      #ar-container {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/prueba_lateral_derecho.mind') }}; filterMinCF:0.001; filterBeta:0.001;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" >
-      <a-assets>
-        <a-asset-item id="bearModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
-        <a-asset-item id="raccoonModel" src="{{ asset('aframe/examples/image-tracking/nft/Rectangulo_B.gltf') }}"></a-asset-item>
-      </a-assets>
+    <div id="ar-container"></div>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <script type="module">
+      import { MindARThree } from "https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js";
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-      </a-entity>
-    </a-scene>
+      // Inicializar MindAR
+      const mindarThree = new MindARThree({
+        container: document.querySelector("#ar-container"),
+        imageTargetSrc: "{{ asset('aframe/examples/assets/vestibulo.mind') }}"
+      });
+
+      const { renderer, scene, camera } = mindarThree;
+
+      // Crear un ancla para el target (imagen detectada)
+      const anchor = mindarThree.addAnchor(0);
+
+      // Crear un canvas para escribir el texto como textura
+      const canvas = document.createElement("canvas");
+      canvas.width = 1024;
+      canvas.height = 256;
+      const ctx = canvas.getContext("2d");
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = "bold 60px sans-serif";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "con las manos cubre su rostro y entre la mano izquierda podrás encontrar un ojo",
+        canvas.width / 2,
+        canvas.height / 2
+      );
+
+      // Crear textura con el canvas
+      const texture = new THREE.CanvasTexture(canvas);
+
+      // Crear plano para el texto
+      const geometry = new THREE.PlaneGeometry(1.5, 0.4); // ancho y alto
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+      });
+
+      const textPlane = new THREE.Mesh(geometry, material);
+      textPlane.position.set(0, -0.6, 0); // posición debajo del centro del target
+      anchor.group.add(textPlane);
+
+      // Iniciar MindAR
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    </script>
   </body>
 </html>
