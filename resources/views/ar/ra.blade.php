@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Texto en mural AR</title>
+  <title>Texto fijo sobre mural</title>
 
-  <!-- Librerías -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
 
@@ -31,16 +30,16 @@
 
   <script>
     async function startAR() {
-      // Inicializar MindAR
+      // Inicializa MindAR
       const mindarThree = new window.MINDAR.IMAGE.MindARThree({
         container: document.querySelector("#ar-container"),
-        imageTargetSrc: "{{ asset('aframe/examples/assets/vestibulo.mind') }}" // tu .mind
+        imageTargetSrc: "{{ asset('aframe/examples/assets/vestibulo.mind') }}"
       });
 
       const { renderer, scene, camera } = mindarThree;
       const anchor = mindarThree.addAnchor(0);
 
-      // Crear texto como textura
+      // Texto sobre el mural
       const canvas = document.createElement("canvas");
       canvas.width = 1024;
       canvas.height = 256;
@@ -69,23 +68,35 @@
       textPlane.position.set(0, -0.6, 0);
       anchor.group.add(textPlane);
 
-      // Suavizado del movimiento
-      const smoothPosition = new THREE.Vector3();
-      const smoothQuaternion = new THREE.Quaternion();
-      const tempPosition = new THREE.Vector3();
-      const tempQuaternion = new THREE.Quaternion();
+      // 💡 Fijar el texto para que no tiemble
+      // Lo actualizamos solo cuando el marcador se detecta, y lo congelamos cuando se pierde
+      let visible = false;
+
+      anchor.onTargetFound = () => {
+        visible = true;
+        textPlane.visible = true;
+      };
+
+      anchor.onTargetLost = () => {
+        visible = false;
+      };
 
       await mindarThree.start();
 
+      // Guardamos la última posición estable
+      const stablePosition = new THREE.Vector3();
+      const stableQuaternion = new THREE.Quaternion();
+
       renderer.setAnimationLoop(() => {
-        anchor.group.getWorldPosition(tempPosition);
-        anchor.group.getWorldQuaternion(tempQuaternion);
-
-        smoothPosition.lerp(tempPosition, 0.15);
-        smoothQuaternion.slerp(tempQuaternion, 0.15);
-
-        textPlane.position.copy(smoothPosition);
-        textPlane.quaternion.copy(smoothQuaternion);
+        if (visible) {
+          // Guardar la última posición estable del ancla
+          anchor.group.getWorldPosition(stablePosition);
+          anchor.group.getWorldQuaternion(stableQuaternion);
+        } else {
+          // Mantener la posición y rotación previas (fijo)
+          textPlane.position.copy(stablePosition);
+          textPlane.quaternion.copy(stableQuaternion);
+        }
 
         renderer.render(scene, camera);
       });
