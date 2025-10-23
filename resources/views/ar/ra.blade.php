@@ -30,7 +30,7 @@
   <div id="ar-container"></div>
 
   <script>
-    // Inicializar MindAR
+  async function startAR() {
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
       container: document.querySelector("#ar-container"),
       imageTargetSrc: "{{ asset('aframe/examples/assets/vestibulo.mind') }}"
@@ -39,7 +39,6 @@
     const { renderer, scene, camera } = mindarThree;
     const anchor = mindarThree.addAnchor(0);
 
-    // Crear texto como textura
     const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = 256;
@@ -67,7 +66,7 @@
     textPlane.position.set(0, -0.6, 0);
     anchor.group.add(textPlane);
 
-    // === Suavizado del movimiento ===
+    // Variables para suavizado
     const smoothPosition = new THREE.Vector3();
     const smoothQuaternion = new THREE.Quaternion();
     const tempPosition = new THREE.Vector3();
@@ -76,20 +75,20 @@
     await mindarThree.start();
 
     renderer.setAnimationLoop(() => {
-      // Obtener posición y rotación actuales del ancla
       anchor.group.getWorldPosition(tempPosition);
       anchor.group.getWorldQuaternion(tempQuaternion);
 
-      // Suavizar (entre 0.1 y 0.3 puedes ajustar)
       smoothPosition.lerp(tempPosition, 0.15);
       smoothQuaternion.slerp(tempQuaternion, 0.15);
 
-      // Aplicar suavizado al texto
       textPlane.position.copy(smoothPosition);
       textPlane.quaternion.copy(smoothQuaternion);
 
       renderer.render(scene, camera);
     });
-  </script>
+  }
+
+  startAR(); // 🔹 Llamamos la función async
+</script>
 </body>
 </html>
