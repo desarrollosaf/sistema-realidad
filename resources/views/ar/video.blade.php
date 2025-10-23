@@ -150,7 +150,7 @@
   <script>
     const targetVideos = {
       0: "{{ asset('aframe/examples/assets/videoDGCS.mp4') }}",
-      1: "{{ asset('aframe/examples/assets/otroVideo.mp4') }}"
+      1: "{{ asset('aframe/examples/assets/videoDGCS.mp4') }}"
      
     };
 
