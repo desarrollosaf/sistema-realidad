@@ -149,7 +149,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     const targetVideos = {
-      0: "{{ asset('aframe/examples/assets/videoDGCS.mp4') }}",
+      0: "{{ asset('aframe/examples/assets/MuralVestibuloNorte.mp4') }}",
       1: "{{ asset('aframe/examples/assets/muralVestibuloSur.mp4') }}"
      
     };
