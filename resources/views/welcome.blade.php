@@ -149,21 +149,21 @@
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.video', 2) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
-                            Ingles
+                            Inglés
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.video', 3) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
-                            Mazahuas
+                            Mazahua 
                         </a>
                     </div>
 
                     <div style="max-width: 100%; width: 100%;">
                         <a href="{{ route('ar.video', 4) }}"
                             style="display: block; text-align: center; padding: 16px 32px; background-color: #94134A; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1rem; white-space: normal; word-wrap: break-word; max-width: 400px; margin: 0 auto;">
-                            Otomíes
+                            Otomí
                         </a>
                     </div>
 
