@@ -104,7 +104,7 @@
   </div>
 
   <!-- ESCENA A-FRAME -->
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/vestibulo.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB"
            renderer="colorManagement: true, physicallyCorrectLights"
            vr-mode-ui="enabled: false"
@@ -151,13 +151,30 @@
     const targetVideos = {
       0: "{{ asset('aframe/examples/assets/murales/01EmbrionPlastico.mp4') }}",
       1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
-      2: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
-      3: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
-      4: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
-      5: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
-      6: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
-      7: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
-      8: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}"
+      2: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
+      3: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
+
+      4: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+      5: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+      6: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+      7: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+
+
+      8: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      9: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      10: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+
+      11: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+      12: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+
+      13: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+      14: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+
+      15: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
+      16: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
+      17: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}",
+      
+      
      
     };
 
@@ -180,6 +197,15 @@
       const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
       const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
       const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
+      const target9 = document.querySelector("[mindar-image-target='targetIndex: 9']");
+      const target10 = document.querySelector("[mindar-image-target='targetIndex: 10']");
+      const target11 = document.querySelector("[mindar-image-target='targetIndex: 11']");
+      const target12 = document.querySelector("[mindar-image-target='targetIndex: 12']");
+      const target13 = document.querySelector("[mindar-image-target='targetIndex: 13']");
+      const target14 = document.querySelector("[mindar-image-target='targetIndex: 14']");
+      const target15 = document.querySelector("[mindar-image-target='targetIndex: 15']");
+      const target16 = document.querySelector("[mindar-image-target='targetIndex: 16']");
+      const target17 = document.querySelector("[mindar-image-target='targetIndex: 17']");
 
 
       if (target0) {
@@ -207,7 +233,34 @@
         target7.addEventListener("targetFound", () => handleTargetFound(7));
       }
       if (target8) {
-        target6.addEventListener("targetFound", () => handleTargetFound(8));
+        target8.addEventListener("targetFound", () => handleTargetFound(8));
+      }
+      if (target9) {
+        target9.addEventListener("targetFound", () => handleTargetFound(9));
+      }
+      if (target10) {
+        target10.addEventListener("targetFound", () => handleTargetFound(10));
+      }
+      if (target11) {
+        target11.addEventListener("targetFound", () => handleTargetFound(11));
+      }
+      if (target12) {
+        target12.addEventListener("targetFound", () => handleTargetFound(12));
+      }
+      if (target13) {
+        target13.addEventListener("targetFound", () => handleTargetFound(13));
+      }
+      if (target14) {
+        target14.addEventListener("targetFound", () => handleTargetFound(14));
+      }
+      if (target15) {
+        target6.addEventListener("targetFound", () => handleTargetFound(15));
+      }
+      if (target16) {
+        target16.addEventListener("targetFound", () => handleTargetFound(16));
+      }
+      if (target17) {
+        target17.addEventListener("targetFound", () => handleTargetFound(17));
       }
 
       function handleTargetFound(targetIndex) {
