@@ -116,9 +116,23 @@
 
     <!-- Target 0: SOLO DISPARA MODAL -->
     <a-entity mindar-image-target="targetIndex: 0"></a-entity>
-
-    <!-- Target 1: puede tener modelo si quieres -->
     <a-entity mindar-image-target="targetIndex: 1"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 2"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 3"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 4"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 5"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 6"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 7"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 8"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 9"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 10"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 11"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 12"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 13"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 14"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 15"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 16"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 17"></a-entity>
   </a-scene>
 
   <!-- MODAL -->
@@ -153,29 +167,20 @@
       1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       2: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       3: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
-
       4: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       5: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       6: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       7: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
-
-
       8: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       9: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       10: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
-
       11: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
       12: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
-
       13: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
       14: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
-
       15: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
       16: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
       17: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}",
-      
-      
-     
     };
 
     $(document).ready(function () {
@@ -188,99 +193,118 @@
       //audioControl.src = alarma.src;
       //audioControl.load();
 
-      const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
-      const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
-      const target2 = document.querySelector("[mindar-image-target='targetIndex: 2']");
-      const target3 = document.querySelector("[mindar-image-target='targetIndex: 3']");
-      const target4 = document.querySelector("[mindar-image-target='targetIndex: 4']");
-      const target5 = document.querySelector("[mindar-image-target='targetIndex: 5']");
-      const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
-      const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
-      const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
-      const target9 = document.querySelector("[mindar-image-target='targetIndex: 9']");
-      const target10 = document.querySelector("[mindar-image-target='targetIndex: 10']");
-      const target11 = document.querySelector("[mindar-image-target='targetIndex: 11']");
-      const target12 = document.querySelector("[mindar-image-target='targetIndex: 12']");
-      const target13 = document.querySelector("[mindar-image-target='targetIndex: 13']");
-      const target14 = document.querySelector("[mindar-image-target='targetIndex: 14']");
-      const target15 = document.querySelector("[mindar-image-target='targetIndex: 15']");
-      const target16 = document.querySelector("[mindar-image-target='targetIndex: 16']");
-      const target17 = document.querySelector("[mindar-image-target='targetIndex: 17']");
+      // const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
+      // const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
+      // const target2 = document.querySelector("[mindar-image-target='targetIndex: 2']");
+      // const target3 = document.querySelector("[mindar-image-target='targetIndex: 3']");
+      // const target4 = document.querySelector("[mindar-image-target='targetIndex: 4']");
+      // const target5 = document.querySelector("[mindar-image-target='targetIndex: 5']");
+      // const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
+      // const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
+      // const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
+      // const target9 = document.querySelector("[mindar-image-target='targetIndex: 9']");
+      // const target10 = document.querySelector("[mindar-image-target='targetIndex: 10']");
+      // const target11 = document.querySelector("[mindar-image-target='targetIndex: 11']");
+      // const target12 = document.querySelector("[mindar-image-target='targetIndex: 12']");
+      // const target13 = document.querySelector("[mindar-image-target='targetIndex: 13']");
+      // const target14 = document.querySelector("[mindar-image-target='targetIndex: 14']");
+      // const target15 = document.querySelector("[mindar-image-target='targetIndex: 15']");
+      // const target16 = document.querySelector("[mindar-image-target='targetIndex: 16']");
+      // const target17 = document.querySelector("[mindar-image-target='targetIndex: 17']");
 
 
-      if (target0) {
-        target0.addEventListener("targetFound", () => handleTargetFound(0));
-      }
-      if (target1) {
-        target1.addEventListener("targetFound", () => handleTargetFound(1));
-      }
-      if (target2) {
-        target2.addEventListener("targetFound", () => handleTargetFound(2));
-      }
-      if (target3) {
-        target3.addEventListener("targetFound", () => handleTargetFound(3));
-      }
-      if (target4) {
-        target4.addEventListener("targetFound", () => handleTargetFound(4));
-      }
-      if (target5) {
-        target5.addEventListener("targetFound", () => handleTargetFound(5));
-      }
-      if (target6) {
-        target6.addEventListener("targetFound", () => handleTargetFound(6));
-      }
-      if (target7) {
-        target7.addEventListener("targetFound", () => handleTargetFound(7));
-      }
-      if (target8) {
-        target8.addEventListener("targetFound", () => handleTargetFound(8));
-      }
-      if (target9) {
-        target9.addEventListener("targetFound", () => handleTargetFound(9));
-      }
-      if (target10) {
-        target10.addEventListener("targetFound", () => handleTargetFound(10));
-      }
-      if (target11) {
-        target11.addEventListener("targetFound", () => handleTargetFound(11));
-      }
-      if (target12) {
-        target12.addEventListener("targetFound", () => handleTargetFound(12));
-      }
-      if (target13) {
-        target13.addEventListener("targetFound", () => handleTargetFound(13));
-      }
-      if (target14) {
-        target14.addEventListener("targetFound", () => handleTargetFound(14));
-      }
-      if (target15) {
-        target6.addEventListener("targetFound", () => handleTargetFound(15));
-      }
-      if (target16) {
-        target16.addEventListener("targetFound", () => handleTargetFound(16));
-      }
-      if (target17) {
-        target17.addEventListener("targetFound", () => handleTargetFound(17));
-      }
+      // if (target0) {
+      //   target0.addEventListener("targetFound", () => handleTargetFound(0));
+      // }
+      // if (target1) {
+      //   target1.addEventListener("targetFound", () => handleTargetFound(1));
+      // }
+      // if (target2) {
+      //   target2.addEventListener("targetFound", () => handleTargetFound(2));
+      // }
+      // if (target3) {
+      //   target3.addEventListener("targetFound", () => handleTargetFound(3));
+      // }
+      // if (target4) {
+      //   target4.addEventListener("targetFound", () => handleTargetFound(4));
+      // }
+      // if (target5) {
+      //   target5.addEventListener("targetFound", () => handleTargetFound(5));
+      // }
+      // if (target6) {
+      //   target6.addEventListener("targetFound", () => handleTargetFound(6));
+      // }
+      // if (target7) {
+      //   target7.addEventListener("targetFound", () => handleTargetFound(7));
+      // }
+      // if (target8) {
+      //   target8.addEventListener("targetFound", () => handleTargetFound(8));
+      // }
+      // if (target9) {
+      //   target9.addEventListener("targetFound", () => handleTargetFound(9));
+      // }
+      // if (target10) {
+      //   target10.addEventListener("targetFound", () => handleTargetFound(10));
+      // }
+      // if (target11) {
+      //   target11.addEventListener("targetFound", () => handleTargetFound(11));
+      // }
+      // if (target12) {
+      //   target12.addEventListener("targetFound", () => handleTargetFound(12));
+      // }
+      // if (target13) {
+      //   target13.addEventListener("targetFound", () => handleTargetFound(13));
+      // }
+      // if (target14) {
+      //   target14.addEventListener("targetFound", () => handleTargetFound(14));
+      // }
+      // if (target15) {
+      //   target6.addEventListener("targetFound", () => handleTargetFound(15));
+      // }
+      // if (target16) {
+      //   target16.addEventListener("targetFound", () => handleTargetFound(16));
+      // }
+      // if (target17) {
+      //   target17.addEventListener("targetFound", () => handleTargetFound(17));
+      // }
 
-      function handleTargetFound(targetIndex) {
-        const videoSrc = targetVideos[targetIndex];
-        if (!videoSrc) return;
+      // function handleTargetFound(targetIndex) {
+      //   const videoSrc = targetVideos[targetIndex];
+      //   if (!videoSrc) return;
 
-        const modal = document.getElementById("customModal");
-        const video = modal.querySelector("video");
+      //   const modal = document.getElementById("customModal");
+      //   const video = modal.querySelector("video");
 
-        // Cambiar el src dinámicamente
-        video.src = videoSrc;
-        video.muted = false;
-        video.load(); // Carga el nuevo video
-        video.play(); // Reproduce
+      //   // Cambiar el src dinámicamente
+      //   video.src = videoSrc;
+      //   video.muted = false;
+      //   video.load(); // Carga el nuevo video
+      //   video.play(); // Reproduce
 
-        // Mostrar el modal
-        modal.classList.remove("hidden");
-        modal.style.display = "flex";
-      }
+      //   // Mostrar el modal
+      //   modal.classList.remove("hidden");
+      //   modal.style.display = "flex";
+      // }
 
+
+      document.querySelectorAll(".mind-target").forEach((el) => {
+        const attr = el.getAttribute("mindar-image-target"); // {targetIndex: "..."}
+        const idx = Number(attr.targetIndex);
+
+        el.addEventListener("targetFound", () => {
+          const videoSrc = targetVideos[idx];
+          if (!videoSrc) return;
+
+          // iOS/Android: si quieres audio, necesitas interacción del usuario.
+          // Aquí lo dejo muted por defecto y lo desmuteo cuando abre el modal.
+          modalVideo.src = videoSrc;
+          modalVideo.muted = false;
+          modalVideo.load();
+          modalVideo.play().catch(() => { /* si falla por autoplay policy */ });
+
+          modal.classList.remove("hidden");
+        });
+      });
       /*audioControl.addEventListener("ended", function () {
         audioControl.play();
       });*/
