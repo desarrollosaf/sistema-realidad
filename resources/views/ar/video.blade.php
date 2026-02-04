@@ -193,80 +193,90 @@
       //audioControl.src = alarma.src;
       //audioControl.load();
 
-      const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
-      const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
-      const target2 = document.querySelector("[mindar-image-target='targetIndex: 2']");
-      const target3 = document.querySelector("[mindar-image-target='targetIndex: 3']");
-      const target4 = document.querySelector("[mindar-image-target='targetIndex: 4']");
-      const target5 = document.querySelector("[mindar-image-target='targetIndex: 5']");
-      const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
-      const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
-      const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
-      const target9 = document.querySelector("[mindar-image-target='targetIndex: 9']");
-      const target10 = document.querySelector("[mindar-image-target='targetIndex: 10']");
-      const target11 = document.querySelector("[mindar-image-target='targetIndex: 11']");
-      const target12 = document.querySelector("[mindar-image-target='targetIndex: 12']");
-      const target13 = document.querySelector("[mindar-image-target='targetIndex: 13']");
-      const target14 = document.querySelector("[mindar-image-target='targetIndex: 14']");
-      const target15 = document.querySelector("[mindar-image-target='targetIndex: 15']");
-      const target16 = document.querySelector("[mindar-image-target='targetIndex: 16']");
-      const target17 = document.querySelector("[mindar-image-target='targetIndex: 17']");
+      // const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
+      // const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
+      // const target2 = document.querySelector("[mindar-image-target='targetIndex: 2']");
+      // const target3 = document.querySelector("[mindar-image-target='targetIndex: 3']");
+      // const target4 = document.querySelector("[mindar-image-target='targetIndex: 4']");
+      // const target5 = document.querySelector("[mindar-image-target='targetIndex: 5']");
+      // const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
+      // const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
+      // const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
+      // const target9 = document.querySelector("[mindar-image-target='targetIndex: 9']");
+      // const target10 = document.querySelector("[mindar-image-target='targetIndex: 10']");
+      // const target11 = document.querySelector("[mindar-image-target='targetIndex: 11']");
+      // const target12 = document.querySelector("[mindar-image-target='targetIndex: 12']");
+      // const target13 = document.querySelector("[mindar-image-target='targetIndex: 13']");
+      // const target14 = document.querySelector("[mindar-image-target='targetIndex: 14']");
+      // const target15 = document.querySelector("[mindar-image-target='targetIndex: 15']");
+      // const target16 = document.querySelector("[mindar-image-target='targetIndex: 16']");
+      // const target17 = document.querySelector("[mindar-image-target='targetIndex: 17']");
 
 
-      if (target0) {
-        target0.addEventListener("targetFound", () => handleTargetFound(0));
-      }
-      if (target1) {
-        target1.addEventListener("targetFound", () => handleTargetFound(1));
-      }
-      if (target2) {
-        target2.addEventListener("targetFound", () => handleTargetFound(2));
-      }
-      if (target3) {
-        target3.addEventListener("targetFound", () => handleTargetFound(3));
-      }
-      if (target4) {
-        target4.addEventListener("targetFound", () => handleTargetFound(4));
-      }
-      if (target5) {
-        target5.addEventListener("targetFound", () => handleTargetFound(5));
-      }
-      if (target6) {
-        target6.addEventListener("targetFound", () => handleTargetFound(6));
-      }
-      if (target7) {
-        target7.addEventListener("targetFound", () => handleTargetFound(7));
-      }
-      if (target8) {
-        target8.addEventListener("targetFound", () => handleTargetFound(8));
-      }
-      if (target9) {
-        target9.addEventListener("targetFound", () => handleTargetFound(9));
-      }
-      if (target10) {
-        target10.addEventListener("targetFound", () => handleTargetFound(10));
-      }
-      if (target11) {
-        target11.addEventListener("targetFound", () => handleTargetFound(11));
-      }
-      if (target12) {
-        target12.addEventListener("targetFound", () => handleTargetFound(12));
-      }
-      if (target13) {
-        target13.addEventListener("targetFound", () => handleTargetFound(13));
-      }
-      if (target14) {
-        target14.addEventListener("targetFound", () => handleTargetFound(14));
-      }
-      if (target15) {
-        target15.addEventListener("targetFound", () => handleTargetFound(15));
-      }
-      if (target16) {
-        target16.addEventListener("targetFound", () => handleTargetFound(16));
-      }
-      if (target17) {
-        target17.addEventListener("targetFound", () => handleTargetFound(17));
-      }
+      // if (target0) {
+      //   target0.addEventListener("targetFound", () => handleTargetFound(0));
+      // }
+      // if (target1) {
+      //   target1.addEventListener("targetFound", () => handleTargetFound(1));
+      // }
+      // if (target2) {
+      //   target2.addEventListener("targetFound", () => handleTargetFound(2));
+      // }
+      // if (target3) {
+      //   target3.addEventListener("targetFound", () => handleTargetFound(3));
+      // }
+      // if (target4) {
+      //   target4.addEventListener("targetFound", () => handleTargetFound(4));
+      // }
+      // if (target5) {
+      //   target5.addEventListener("targetFound", () => handleTargetFound(5));
+      // }
+      // if (target6) {
+      //   target6.addEventListener("targetFound", () => handleTargetFound(6));
+      // }
+      // if (target7) {
+      //   target7.addEventListener("targetFound", () => handleTargetFound(7));
+      // }
+      // if (target8) {
+      //   target8.addEventListener("targetFound", () => handleTargetFound(8));
+      // }
+      // if (target9) {
+      //   target9.addEventListener("targetFound", () => handleTargetFound(9));
+      // }
+      // if (target10) {
+      //   target10.addEventListener("targetFound", () => handleTargetFound(10));
+      // }
+      // if (target11) {
+      //   target11.addEventListener("targetFound", () => handleTargetFound(11));
+      // }
+      // if (target12) {
+      //   target12.addEventListener("targetFound", () => handleTargetFound(12));
+      // }
+      // if (target13) {
+      //   target13.addEventListener("targetFound", () => handleTargetFound(13));
+      // }
+      // if (target14) {
+      //   target14.addEventListener("targetFound", () => handleTargetFound(14));
+      // }
+      // if (target15) {
+      //   target15.addEventListener("targetFound", () => handleTargetFound(15));
+      // }
+      // if (target16) {
+      //   target16.addEventListener("targetFound", () => handleTargetFound(16));
+      // }
+      // if (target17) {
+      //   target17.addEventListener("targetFound", () => handleTargetFound(17));
+      // }
+
+      document.querySelectorAll("[mindar-image-target]").forEach((el) => {
+        const attr = el.getAttribute("mindar-image-target");
+        // attr suele venir como: "targetIndex: 3" o similar
+        const match = attr.match(/targetIndex:\s*(\d+)/);
+        if (!match) return;
+
+        const idx = Number(match[1]);
+        el.addEventListener("targetFound", () => handleTargetFound(idx));
+      });
 
       function handleTargetFound(targetIndex) {
         const videoSrc = targetVideos[targetIndex];
