@@ -149,8 +149,15 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     const targetVideos = {
-      0: "{{ asset('aframe/examples/assets/MuralVestibuloNorte.mp4') }}",
-      1: "{{ asset('aframe/examples/assets/muralVestibuloSur.mp4') }}"
+      0: "{{ asset('aframe/examples/assets/murales/01EmbrionPlastico.mp4') }}",
+      1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
+      2: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+      3: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      4: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+      5: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+      6: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
+      7: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
+      8: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}"
      
     };
 
@@ -166,36 +173,41 @@
 
       const target0 = document.querySelector("[mindar-image-target='targetIndex: 0']");
       const target1 = document.querySelector("[mindar-image-target='targetIndex: 1']");
+      const target2 = document.querySelector("[mindar-image-target='targetIndex: 2']");
+      const target3 = document.querySelector("[mindar-image-target='targetIndex: 3']");
+      const target4 = document.querySelector("[mindar-image-target='targetIndex: 4']");
+      const target5 = document.querySelector("[mindar-image-target='targetIndex: 5']");
+      const target6 = document.querySelector("[mindar-image-target='targetIndex: 6']");
+      const target7 = document.querySelector("[mindar-image-target='targetIndex: 7']");
+      const target8 = document.querySelector("[mindar-image-target='targetIndex: 8']");
+
 
       if (target0) {
-        console.log('holaaa target 0')
         target0.addEventListener("targetFound", () => handleTargetFound(0));
-        /*target0.addEventListener("targetFound", () => {
-          console.log("Target detectado");
-          modal.classList.remove('hidden');
-          modal.style.display = "flex";
-          //audioControl.play();
-
-          const video = modal.querySelector('video');
-          video.muted = false;
-          video.play();
-
-        });*/
       }
-
-       if (target1) {
-        console.log('holaaa target 1')
+      if (target1) {
         target1.addEventListener("targetFound", () => handleTargetFound(1));
-        /*target1.addEventListener("targetFound", () => {
-          console.log("Target detectado");
-          modal.classList.remove('hidden');
-          modal.style.display = "flex";
-          //audioControl.play();
-
-          const video = modal.querySelector('video');
-          video.muted = false;
-          video.play();
-        });*/
+      }
+      if (target2) {
+        target2.addEventListener("targetFound", () => handleTargetFound(2));
+      }
+      if (target3) {
+        target3.addEventListener("targetFound", () => handleTargetFound(3));
+      }
+      if (target4) {
+        target4.addEventListener("targetFound", () => handleTargetFound(4));
+      }
+      if (target5) {
+        target5.addEventListener("targetFound", () => handleTargetFound(5));
+      }
+      if (target6) {
+        target6.addEventListener("targetFound", () => handleTargetFound(6));
+      }
+      if (target7) {
+        target7.addEventListener("targetFound", () => handleTargetFound(7));
+      }
+      if (target8) {
+        target6.addEventListener("targetFound", () => handleTargetFound(8));
       }
 
       function handleTargetFound(targetIndex) {
