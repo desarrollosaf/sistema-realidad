@@ -259,7 +259,7 @@
         target14.addEventListener("targetFound", () => handleTargetFound(14));
       }
       if (target15) {
-        target6.addEventListener("targetFound", () => handleTargetFound(15));
+        target15.addEventListener("targetFound", () => handleTargetFound(15));
       }
       if (target16) {
         target16.addEventListener("targetFound", () => handleTargetFound(16));
