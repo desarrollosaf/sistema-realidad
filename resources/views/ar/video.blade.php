@@ -167,20 +167,36 @@
       1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       2: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       3: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
+
       4: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       5: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       6: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       7: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
-      8: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
-      9: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      8: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+      9: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
+
       10: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
-      11: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
-      12: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
-      13: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
-      14: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
-      15: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
-      16: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
-      17: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}",
+      11: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      12: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      13: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+      14: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
+
+      15: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+      16: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+      17: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+      18: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
+
+
+
+      19: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+      20: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+      21: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+      22: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
+
+
+      23: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
+      24: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
+      25: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}",
     };
 
     $(document).ready(function () {
