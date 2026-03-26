@@ -207,7 +207,7 @@
 
       25: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
       26: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
-      27: "{{ asset('aframe/examples/assets/murales/09Vestíbuloladonorte.mp4') }}",
+      27: "{{ asset('aframe/examples/assets/murales/09Vestibuloladonorte.mp4') }}",
     };
 
     $(document).ready(function () {
