@@ -133,6 +133,16 @@
     <a-entity mindar-image-target="targetIndex: 15"></a-entity>
     <a-entity mindar-image-target="targetIndex: 16"></a-entity>
     <a-entity mindar-image-target="targetIndex: 17"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 18"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 19"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 20"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 21"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 22"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 23"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 24"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 25"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 26"></a-entity>
+    <a-entity mindar-image-target="targetIndex: 27"></a-entity>
   </a-scene>
 
   <!-- MODAL -->
