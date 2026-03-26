@@ -104,7 +104,7 @@
   </div>
 
   <!-- ESCENA A-FRAME -->
-  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
+  <a-scene mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF2.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
            color-space="sRGB"
            renderer="colorManagement: true, physicallyCorrectLights"
            vr-mode-ui="enabled: false"
@@ -164,6 +164,7 @@
   <script>
     const targetVideos = {
       0: "{{ asset('aframe/examples/assets/murales/01EmbrionPlastico.mp4') }}",
+
       1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       2: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       3: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
