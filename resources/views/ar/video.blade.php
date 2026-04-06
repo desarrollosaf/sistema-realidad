@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -9,11 +9,14 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       font-family: Arial, Helvetica, sans-serif;
       background: #000;
@@ -24,10 +27,6 @@
       top: 12px;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
       z-index: 9999;
       pointer-events: none;
     }
@@ -37,22 +36,18 @@
     }
 
     .button {
-      padding: 10px 18px;
-      background: linear-gradient(135deg, #94134A, #7a103d);
+      width: 48px;
+      height: 48px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #94134A, #7a103d);
       color: #fff;
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      min-width: 52px;
-      height: 44px;
-    }
-
-    .button:hover {
-      opacity: 0.92;
-      transform: scale(1.03);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #customModal {
@@ -65,7 +60,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 14px;
+      padding: 14px;
     }
 
     #customModal.hidden {
@@ -74,19 +69,31 @@
 
     .modal-container {
       width: 100%;
-      max-width: 420px;
-      background: #ffffff;
-      border-radius: 22px;
-      padding: 18px 18px 16px;
+      max-width: 370px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
       text-align: center;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.35);
-      animation: fadeUp 0.25s ease;
+      animation: fadeUp .25s ease;
+      scrollbar-width: thin;
+    }
+
+    .modal-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal-container::-webkit-scrollbar-thumb {
+      background: rgba(148, 19, 74, 0.35);
+      border-radius: 10px;
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(18px) scale(0.98);
+        transform: translateY(16px) scale(.98);
       }
       to {
         opacity: 1;
@@ -94,69 +101,79 @@
       }
     }
 
-    .modal-title {
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 700;
-      color: #222;
-    }
-
     .modal-subtitle {
-      margin: 0 0 14px;
-      font-size: 14px;
+      margin: 0 0 10px;
+      font-size: 12px;
       color: #666;
-      line-height: 1.4;
+      line-height: 1.35;
+      padding: 0 4px;
     }
 
     .modal-video-wrap {
       width: 100%;
       display: flex;
       justify-content: center;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .modal-video {
       width: 100%;
-      max-width: 300px;
-      max-height: 52vh;
+      max-width: 250px;
+      max-height: 35vh;
       border-radius: 14px;
       background: #000;
       box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+      object-fit: cover;
     }
 
     .direction-card {
-      background: #f7f7f7;
-      border-radius: 16px;
-      padding: 12px;
-      margin-top: 6px;
+      background: #fafafa;
       border: 1px solid #ececec;
+      border-radius: 14px;
+      padding: 10px;
     }
 
     .direction-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #94134A;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .direction-text {
-      font-size: 13px;
+      font-size: 12px;
       color: #555;
-      margin-bottom: 10px;
-      line-height: 1.4;
+      margin-bottom: 8px;
+      line-height: 1.35;
+      min-height: 34px;
+    }
+
+    .gif-frame {
+      width: 100%;
+      max-width: 230px;
+      height: 125px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
     }
 
     .direction-gif {
-      width: 100%;
-      max-width: 220px;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
       height: auto;
-      border-radius: 12px;
       display: block;
-      margin: 0 auto;
+      object-fit: contain;
     }
 
     .modal-actions {
-      margin-top: 16px;
+      margin-top: 12px;
       display: flex;
       justify-content: center;
     }
@@ -172,30 +189,25 @@
       box-shadow: 0 6px 16px rgba(148, 19, 74, 0.22);
     }
 
-    .close-btn:hover {
-      opacity: 0.94;
-    }
-
     @media (max-width: 480px) {
       .modal-container {
-        max-width: 360px;
-        padding: 16px 14px 14px;
+        max-width: 350px;
+        max-height: 88vh;
+        padding: 12px;
       }
 
-      .modal-title {
-        font-size: 18px;
+      .modal-video {
+        max-width: 235px;
+        max-height: 33vh;
       }
 
-      .modal-subtitle {
-        font-size: 13px;
-      }
-
-      .direction-title {
-        font-size: 14px;
+      .gif-frame {
+        max-width: 215px;
+        height: 115px;
       }
 
       .direction-text {
-        font-size: 12px;
+        font-size: 11px;
       }
     }
   </style>
@@ -203,14 +215,12 @@
 
 <body>
 
-  <!-- BOTÓN SUPERIOR -->
   <div id="overlay">
     <button id="menuBtn" class="button">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
   </div>
 
-  <!-- ESCENA -->
   <a-scene
     mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
     color-space="sRGB"
@@ -256,10 +266,8 @@
     <a-entity mindar-image-target="targetIndex: 31"></a-entity>
   </a-scene>
 
-  <!-- MODAL -->
   <div id="customModal" class="hidden">
     <div class="modal-container">
-      <h2 class="modal-title">Ubicación del mural</h2>
       <p class="modal-subtitle">
         Mira el video y después sigue la indicación visual para dirigirte al punto correcto.
       </p>
@@ -276,25 +284,27 @@
 
       <div class="direction-card">
         <div class="direction-title">¿Hacia dónde ir?</div>
+
         <div class="direction-text" id="directionText">
           Sigue la referencia visual mostrada abajo para ubicarte mejor dentro del edificio.
         </div>
 
-        <img
-          id="directionGif"
-          class="direction-gif"
-          src="{{ asset('aframe/examples/assets/murales/ruta/embrion-plastico.gif') }}"
-          alt="Indicador de dirección"
-        >
+        <div class="gif-frame">
+          <img
+            id="directionGif"
+            class="direction-gif"
+            src="{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}"
+            alt="Indicador de dirección"
+          >
+        </div>
       </div>
 
       <div class="modal-actions">
-        <button onclick="closeModal()" class="close-btn">Cerrar</button>
+        <button type="button" onclick="closeModal()" class="close-btn">Cerrar</button>
       </div>
     </div>
   </div>
 
-  <!-- AUDIOS -->
   <audio id="idioma1" src="{{ asset('images/Español_01.mp3') }}"></audio>
   <audio id="idioma2" src="{{ asset('images/Ingles_01.mp3') }}"></audio>
   <audio id="idioma3" src="{{ asset('images/Mazahua_01.mp3') }}"></audio>
@@ -349,44 +359,163 @@
         gif: "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}",
         text: "Dirígete al vestíbulo, lado sur, mural “El Embrión Plástico”."
       },
+
       1: {
         gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
         text: "Sigue hacia la escalera sur y ubica el muro oriente."
       },
       2: {
-        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
         text: "Sigue hacia la escalera sur y ubica el muro oriente."
       },
       3: {
-        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
         text: "Sigue hacia la escalera sur y ubica el muro oriente."
       },
       4: {
-        gif: "{{ asset('aframe/examples/assets/murales/gifs/8-9.gif') }}",
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
         text: "Sigue hacia la escalera sur y ubica el muro oriente."
+      },
+      5: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+        text: "Sigue hacia la escalera sur y ubica el muro oriente."
+      },
+      6: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+        text: "Sigue hacia la escalera sur y ubica el muro oriente."
+      },
+      7: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+        text: "Sigue hacia la escalera sur y ubica el muro oriente."
+      },
+
+      8: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      9: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      10: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      11: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      12: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      13: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+      14: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+        text: "Continúa y ubica el siguiente punto en planta alta."
+      },
+
+      15: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        text: "Dirígete al siguiente tramo indicado."
+      },
+      16: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        text: "Dirígete al siguiente tramo indicado."
+      },
+      17: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        text: "Dirígete al siguiente tramo indicado."
+      },
+      18: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        text: "Dirígete al siguiente tramo indicado."
+      },
+      19: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/7-8.gif') }}",
+        text: "Dirígete al siguiente tramo indicado."
+      },
+
+      20: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
+        text: "Ubica el recorrido señalado en el plano."
+      },
+      21: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
+        text: "Ubica el recorrido señalado en el plano."
+      },
+      22: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
+        text: "Ubica el recorrido señalado en el plano."
+      },
+      23: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
+        text: "Ubica el recorrido señalado en el plano."
+      },
+      24: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
+        text: "Ubica el recorrido señalado en el plano."
+      },
+
+      25: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
+        text: "Sigue la ruta del plano para llegar al punto."
+      },
+      26: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
+        text: "Sigue la ruta del plano para llegar al punto."
+      },
+      27: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
+        text: "Sigue la ruta del plano para llegar al punto."
+      },
+      28: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
+        text: "Sigue la ruta del plano para llegar al punto."
+      },
+
+      29: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/11-12.gif') }}",
+        text: "Continúa hacia la siguiente ubicación marcada."
+      },
+      30: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/11-12.gif') }}",
+        text: "Continúa hacia la siguiente ubicación marcada."
+      },
+
+      31: {
+        gif: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}",
+        text: "Este es el último tramo del recorrido indicado."
       }
     };
 
     $(document).ready(function () {
-      const idioma = {!! json_encode($idioma) !!};
-      const alarma = document.getElementById("idioma" + idioma);
       const modal = document.getElementById("customModal");
       const modalVideo = document.getElementById("modalVideo");
       const directionGif = document.getElementById("directionGif");
       const directionText = document.getElementById("directionText");
+      const menuBtn = document.getElementById("menuBtn");
 
       let currentTargetIndex = null;
       let modalOpen = false;
+      let openCooldown = false;
 
       modal.classList.add("hidden");
 
       document.querySelectorAll("[mindar-image-target]").forEach((el) => {
         const attr = el.getAttribute("mindar-image-target");
-        const match = attr.match(/targetIndex:\s*(\d+)/);
+        const match = attr && attr.match(/targetIndex:\s*(\d+)/);
         if (!match) return;
 
         const idx = Number(match[1]);
-        el.addEventListener("targetFound", () => handleTargetFound(idx));
+
+        el.addEventListener("targetFound", () => {
+          if (openCooldown) return;
+          handleTargetFound(idx);
+        });
       });
 
       function handleTargetFound(targetIndex) {
@@ -394,14 +523,19 @@
 
         currentTargetIndex = targetIndex;
         modalOpen = true;
+        openCooldown = true;
 
         const videoSrc = targetVideos[targetIndex];
         const directionData = targetDirections[targetIndex] || {
-          gif: "{{ asset('aframe/examples/assets/murales/ruta/default.gif') }}",
+          gif: "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}",
           text: "Sigue la referencia visual para llegar al mural correspondiente."
         };
 
+        directionGif.src = directionData.gif;
+        directionText.textContent = directionData.text;
+
         if (videoSrc) {
+          modalVideo.pause();
           modalVideo.src = videoSrc;
           modalVideo.muted = false;
           modalVideo.load();
@@ -410,18 +544,19 @@
           if (playPromise !== undefined) {
             playPromise.catch(() => {
               modalVideo.muted = true;
-              modalVideo.play();
+              modalVideo.play().catch(() => {});
             });
           }
         }
 
-        directionGif.src = directionData.gif;
-        directionText.textContent = directionData.text;
-
         modal.classList.remove("hidden");
+
+        setTimeout(() => {
+          openCooldown = false;
+        }, 1200);
       }
 
-      $('#menuBtn').click(() => {
+      menuBtn.addEventListener("click", () => {
         window.location.href = "/";
       });
 
@@ -433,6 +568,12 @@
         currentTargetIndex = null;
         modalOpen = false;
       };
+
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
     });
   </script>
 </body>
