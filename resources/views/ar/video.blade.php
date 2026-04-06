@@ -217,11 +217,11 @@
 
 <body>
 
-  <div id="overlay">
+  {{-- <div id="overlay">
     <button id="menuBtn" class="button" type="button">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
-  </div>
+  </div> --}}
 
   <a-scene
     mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
@@ -271,9 +271,9 @@
 
   <div id="customModal" class="hidden">
     <div class="modal-container">
-      <p class="modal-subtitle">
+      {{-- <p class="modal-subtitle">
         Mira el video y sigue la referencia visual.
-      </p>
+      </p> --}}
 
       <div class="modal-video-wrap">
         <video
