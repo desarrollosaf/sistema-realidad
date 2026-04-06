@@ -103,8 +103,8 @@
       border-radius: 24px 24px 0 0;
       padding: 0 0 max(20px, env(safe-area-inset-bottom, 20px));
       animation: slideUp .3s cubic-bezier(.25,.8,.25,1);
-      height: 96dvh;
-      height: 96vh;
+      height: 85dvh;
+      height: 85vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       display: flex;
