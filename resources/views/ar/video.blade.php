@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
@@ -18,7 +18,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       background: #000;
     }
 
@@ -27,6 +27,7 @@
       inset: 0;
     }
 
+    /* ── AR Scene & Camera Feed ─────────────────────────── */
     a-scene {
       position: fixed !important;
       inset: 0 !important;
@@ -44,168 +45,208 @@
       height: 100vh !important;
       object-fit: cover !important;
       z-index: 1 !important;
-      background: transparent !important;
     }
 
+    /* ── Top overlay button ─────────────────────────────── */
     #overlay {
       position: fixed;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: max(14px, env(safe-area-inset-top, 14px));
+      left: max(14px, env(safe-area-inset-left, 14px));
       z-index: 9999;
-      pointer-events: none;
     }
 
-    #overlay button {
-      pointer-events: auto;
-    }
-
-    .button {
-      width: 46px;
-      height: 46px;
+    .back-btn {
+      width: 48px;
+      height: 48px;
       border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #94134A, #7a103d);
+      border-radius: 14px;
+      background: linear-gradient(145deg, #94134A, #6e0e37);
       color: #fff;
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 14px rgba(148, 19, 74, 0.45);
+      transition: transform .15s, box-shadow .15s;
     }
 
+    .back-btn:active {
+      transform: scale(.93);
+      box-shadow: 0 2px 8px rgba(148, 19, 74, 0.35);
+    }
+
+    /* ── Modal backdrop ─────────────────────────────────── */
     #customModal {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.55);
       z-index: 99999;
       display: flex;
-      align-items: flex-start;
+      align-items: flex-end;
       justify-content: center;
-      padding: 78px 12px 12px;
+      padding: 0;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     #customModal.hidden {
       display: none !important;
     }
 
+    /* ── Modal card (bottom sheet style) ───────────────── */
     .modal-container {
-      width: 88vw;
-      max-width: 380px;
+      width: 100%;
+      max-width: 520px;
       background: #fff;
-      border-radius: 18px;
-      padding: 10px 10px 12px;
-      text-align: center;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-      animation: fadeUp .25s ease;
+      border-radius: 24px 24px 0 0;
+      padding: 0 0 max(20px, env(safe-area-inset-bottom, 20px));
+      animation: slideUp .3s cubic-bezier(.25,.8,.25,1);
+      max-height: 92dvh;
+      max-height: 92vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px) scale(.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);   opacity: 1; }
     }
 
+    /* Drag handle */
+    .modal-handle {
+      width: 40px;
+      height: 5px;
+      background: #ddd;
+      border-radius: 3px;
+      margin: 14px auto 12px;
+    }
+
+    /* ── Video section ──────────────────────────────────── */
     .modal-video-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 8px;
+      width: 100%;
+      background: #000;
+      position: relative;
     }
 
     .modal-video {
       width: 100%;
-      max-width: 250px;
-      max-height: 52vh;
-      border-radius: 12px;
-      background: #000;
-      object-fit: contain;
       display: block;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      max-height: 56vw;       /* 16:9-ish on phones */
+      object-fit: contain;
+      background: #000;
     }
 
-    .route-box {
-      margin-top: 2px;
-      background: #fafafa;
-      border: 1px solid #ececec;
-      border-radius: 12px;
-      padding: 7px 8px 8px;
+    /* Larger on tablets / wider screens */
+    @media (min-width: 480px) {
+      .modal-video {
+        max-height: 300px;
+      }
     }
 
-    .route-title {
-      font-size: 12px;
+    @media (min-width: 640px) {
+      .modal-video {
+        max-height: 360px;
+      }
+    }
+
+    /* ── Route section ──────────────────────────────────── */
+    .route-section {
+      padding: 14px 16px 4px;
+    }
+
+    .route-label {
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       color: #94134A;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
-    .gif-frame {
+    .gif-wrapper {
       width: 100%;
-      max-width: 150px;
-      height: 70px;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid #e6e6e6;
-      border-radius: 10px;
+      background: #f7f7f7;
+      border: 1px solid #ececec;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 3px;
+      padding: 8px;
+      min-height: 80px;
     }
 
     .direction-gif {
       max-width: 100%;
-      max-height: 100%;
       width: auto;
       height: auto;
+      max-height: 120px;
       object-fit: contain;
       display: block;
     }
 
+    @media (min-width: 480px) {
+      .direction-gif {
+        max-height: 160px;
+      }
+    }
+
+    /* ── Actions ────────────────────────────────────────── */
     .modal-actions {
-      margin-top: 10px;
+      padding: 12px 16px 0;
       display: flex;
-      justify-content: center;
+      gap: 10px;
     }
 
     .close-btn {
-      padding: 8px 22px;
-      background: linear-gradient(135deg, #94134A, #7a103d);
+      flex: 1;
+      padding: 14px;
+      background: linear-gradient(145deg, #94134A, #6e0e37);
       color: #fff;
       border: none;
-      border-radius: 10px;
-      font-size: 13px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(148, 19, 74, 0.22);
+      letter-spacing: .02em;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(148, 19, 74, 0.35);
     }
 
-    @media (max-width: 480px) {
+    .close-btn:active {
+      transform: scale(.97);
+      box-shadow: 0 2px 8px rgba(148, 19, 74, 0.25);
+    }
+
+    /* ── Dark-mode awareness ────────────────────────────── */
+    @media (prefers-color-scheme: dark) {
+      .modal-container { background: #1c1c1e; }
+      .modal-handle { background: #444; }
+      .gif-wrapper { background: #2c2c2e; border-color: #3a3a3c; }
+      .route-label { color: #e05080; }
+    }
+
+    /* ── Landscape phone ────────────────────────────────── */
+    @media (orientation: landscape) and (max-height: 500px) {
       #customModal {
-        padding: 72px 10px 10px;
+        align-items: center;
+        padding: 0 16px;
       }
 
       .modal-container {
-        width: 86vw;
-        max-width: 330px;
-        padding: 9px 9px 11px;
+        border-radius: 20px;
+        max-height: 88dvh;
+        max-height: 88vh;
+        max-width: 600px;
       }
 
       .modal-video {
-        max-width: 235px;
-        max-height: 50vh;
+        max-height: 38vh;
       }
 
-      .gif-frame {
-        max-width: 138px;
-        height: 64px;
+      .direction-gif {
+        max-height: 80px;
       }
     }
   </style>
@@ -214,11 +255,12 @@
 <body>
 
   <div id="overlay">
-    <button id="menuBtn" class="button" type="button">
+    <button id="menuBtn" class="back-btn" type="button" aria-label="Regresar">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
   </div>
 
+  <!-- ── A-Frame Scene ───────────────────────────────────── -->
   <a-scene
     mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
     color-space="sRGB"
@@ -265,8 +307,11 @@
     <a-entity mindar-image-target="targetIndex: 31"></a-entity>
   </a-scene>
 
-  <div id="customModal" class="hidden">
+  <!-- ── Modal ────────────────────────────────────────────── -->
+  <div id="customModal" class="hidden" role="dialog" aria-modal="true" aria-label="Información del mural">
     <div class="modal-container">
+      <div class="modal-handle"></div>
+
       <div class="modal-video-wrap">
         <video
           id="modalVideo"
@@ -278,14 +323,14 @@
         ></video>
       </div>
 
-      <div class="route-box">
-        <div class="route-title">Ruta</div>
-        <div class="gif-frame">
+      <div class="route-section">
+        <div class="route-label">Ruta</div>
+        <div class="gif-wrapper">
           <img
             id="directionGif"
             class="direction-gif"
             src="{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}"
-            alt="Ruta"
+            alt="Diagrama de ruta al mural"
           >
         </div>
       </div>
@@ -296,10 +341,10 @@
     </div>
   </div>
 
+  <!-- ── Scripts ──────────────────────────────────────────── -->
   <script>
     const targetVideos = {
       0: "{{ asset('aframe/examples/assets/murales/01EmbrionPlastico.mp4') }}",
-
       1: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       2: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       3: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
@@ -307,7 +352,6 @@
       5: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       6: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
       7: "{{ asset('aframe/examples/assets/murales/02EscaleraSuryMuroOrientedelaEscaleraSur.mp4') }}",
-
       8: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       9: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       10: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
@@ -315,40 +359,36 @@
       12: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       13: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
       14: "{{ asset('aframe/examples/assets/murales/03MuroOrientePlantaSuperior.mp4') }}",
-
       15: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       16: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       17: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       18: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
       19: "{{ asset('aframe/examples/assets/murales/04EscaleraNorte.mp4') }}",
-
       20: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
       21: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
       22: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
       23: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
       24: "{{ asset('aframe/examples/assets/murales/05MuroOrientePlantaBaja.mp4') }}",
-
       25: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
       26: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
       27: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
       28: "{{ asset('aframe/examples/assets/murales/06MuroOrientePlantaBajaparte sur.mp4') }}",
-
       29: "{{ asset('aframe/examples/assets/murales/07MuroSurpuertaOriente.mp4') }}",
       30: "{{ asset('aframe/examples/assets/murales/08MuroNortepuertaOriente.mp4') }}",
       31: "{{ asset('aframe/examples/assets/murales/09Vestibuloladonorte.mp4') }}"
     };
 
     const targetDirections = {
-      0: "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}",
-      1: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      2: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      3: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      4: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      5: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      6: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      7: "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      8: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
-      9: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+      0:  "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}",
+      1:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      2:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      3:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      4:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      5:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      6:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      7:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      8:  "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
+      9:  "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
       10: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
       11: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
       12: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
@@ -374,40 +414,39 @@
     };
 
     document.addEventListener("DOMContentLoaded", () => {
-      const modal = document.getElementById("customModal");
+      const modal      = document.getElementById("customModal");
       const modalVideo = document.getElementById("modalVideo");
-      const directionGif = document.getElementById("directionGif");
-      const menuBtn = document.getElementById("menuBtn");
+      const dirGif     = document.getElementById("directionGif");
+      const menuBtn    = document.getElementById("menuBtn");
 
-      let currentTargetIndex = null;
-      let modalOpen = false;
-      let openCooldown = false;
+      let currentIdx  = null;
+      let modalOpen   = false;
+      let cooldown    = false;
 
+      /* ── Listen for AR target events ── */
       document.querySelectorAll("[mindar-image-target]").forEach((el) => {
-        const attr = el.getAttribute("mindar-image-target");
+        const attr  = el.getAttribute("mindar-image-target");
         const match = attr && attr.match(/targetIndex:\s*(\d+)/);
         if (!match) return;
 
         const idx = Number(match[1]);
-
         el.addEventListener("targetFound", () => {
-          if (openCooldown) return;
-          openModalForTarget(idx);
+          if (cooldown) return;
+          openModal(idx);
         });
       });
 
-      function openModalForTarget(targetIndex) {
-        if (modalOpen && currentTargetIndex === targetIndex) return;
+      function openModal(idx) {
+        if (modalOpen && currentIdx === idx) return;
 
-        currentTargetIndex = targetIndex;
-        modalOpen = true;
-        openCooldown = true;
+        currentIdx = idx;
+        modalOpen  = true;
+        cooldown   = true;
 
-        const videoSrc = targetVideos[targetIndex];
-        const gifSrc = targetDirections[targetIndex] || "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}";
+        const videoSrc = targetVideos[idx];
+        const gifSrc   = targetDirections[idx] || targetDirections[0];
 
-        directionGif.src = gifSrc;
-
+        dirGif.src = gifSrc;
         modal.classList.remove("hidden");
 
         if (videoSrc) {
@@ -426,9 +465,7 @@
           }
         }
 
-        setTimeout(() => {
-          openCooldown = false;
-        }, 1200);
+        setTimeout(() => { cooldown = false; }, 1200);
       }
 
       window.closeModal = function () {
@@ -436,14 +473,16 @@
         modalVideo.pause();
         modalVideo.removeAttribute("src");
         modalVideo.load();
-        currentTargetIndex = null;
-        modalOpen = false;
+        currentIdx = null;
+        modalOpen  = false;
       };
 
+      /* Close when tapping the backdrop */
       modal.addEventListener("click", (e) => {
         if (e.target === modal) closeModal();
       });
 
+      /* Back button */
       menuBtn.addEventListener("click", () => {
         window.location.href = "/";
       });
