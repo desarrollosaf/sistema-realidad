@@ -323,7 +323,7 @@
       </div>
 
       <div class="route-section">
-        <div class="route-label">Ruta</div>
+        <div class="route-label">¿Hacia dónde ir?</div>
         <div class="gif-wrapper">
           <img
             id="directionGif"
