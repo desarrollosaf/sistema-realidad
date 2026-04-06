@@ -36,7 +36,6 @@
       background: transparent !important;
     }
 
-    /* Esto ayuda a que en móvil la cámara no se vea negra */
     video:not(.modal-video),
     canvas {
       position: fixed !important;
@@ -62,13 +61,13 @@
     }
 
     .button {
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border: none;
       border-radius: 12px;
       background: linear-gradient(135deg, #94134A, #7a103d);
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
       display: flex;
@@ -81,12 +80,12 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.78);
+      background: rgba(0, 0, 0, 0.45);
       z-index: 99999;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 12px;
+      padding: 78px 12px 12px;
     }
 
     #customModal.hidden {
@@ -94,11 +93,11 @@
     }
 
     .modal-container {
-      width: 100%;
-      max-width: 340px;
+      width: 88vw;
+      max-width: 380px;
       background: #fff;
       border-radius: 18px;
-      padding: 12px 12px 14px;
+      padding: 10px 10px 12px;
       text-align: center;
       box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
       animation: fadeUp .25s ease;
@@ -115,13 +114,6 @@
       }
     }
 
-    .modal-subtitle {
-      margin: 0 0 8px;
-      font-size: 11px;
-      line-height: 1.35;
-      color: #666;
-    }
-
     .modal-video-wrap {
       display: flex;
       justify-content: center;
@@ -130,9 +122,8 @@
 
     .modal-video {
       width: 100%;
-      max-width: 230px;
-      height: auto;
-      max-height: 42vh;
+      max-width: 250px;
+      max-height: 52vh;
       border-radius: 12px;
       background: #000;
       object-fit: contain;
@@ -141,15 +132,15 @@
     }
 
     .route-box {
-      margin-top: 4px;
+      margin-top: 2px;
       background: #fafafa;
       border: 1px solid #ececec;
       border-radius: 12px;
-      padding: 8px;
+      padding: 7px 8px 8px;
     }
 
     .route-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #94134A;
       margin-bottom: 6px;
@@ -157,8 +148,8 @@
 
     .gif-frame {
       width: 100%;
-      max-width: 190px;
-      height: 90px;
+      max-width: 150px;
+      height: 70px;
       margin: 0 auto;
       background: #fff;
       border: 1px solid #e6e6e6;
@@ -167,7 +158,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 4px;
+      padding: 3px;
     }
 
     .direction-gif {
@@ -186,7 +177,7 @@
     }
 
     .close-btn {
-      padding: 9px 22px;
+      padding: 8px 22px;
       background: linear-gradient(135deg, #94134A, #7a103d);
       color: #fff;
       border: none;
@@ -197,19 +188,24 @@
     }
 
     @media (max-width: 480px) {
+      #customModal {
+        padding: 72px 10px 10px;
+      }
+
       .modal-container {
-        max-width: 300px;
-        padding: 10px 10px 12px;
+        width: 86vw;
+        max-width: 330px;
+        padding: 9px 9px 11px;
       }
 
       .modal-video {
-        max-width: 205px;
-        max-height: 40vh;
+        max-width: 235px;
+        max-height: 50vh;
       }
 
       .gif-frame {
-        max-width: 165px;
-        height: 78px;
+        max-width: 138px;
+        height: 64px;
       }
     }
   </style>
@@ -217,11 +213,11 @@
 
 <body>
 
-  {{-- <div id="overlay">
+  <div id="overlay">
     <button id="menuBtn" class="button" type="button">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
-  </div> --}}
+  </div>
 
   <a-scene
     mindar-image="imageTargetSrc: {{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}; filterMinCF:0.0001; filterBeta:0.0001;"
@@ -271,10 +267,6 @@
 
   <div id="customModal" class="hidden">
     <div class="modal-container">
-      {{-- <p class="modal-subtitle">
-        Mira el video y sigue la referencia visual.
-      </p> --}}
-
       <div class="modal-video-wrap">
         <video
           id="modalVideo"
