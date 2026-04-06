@@ -86,6 +86,7 @@
       align-items: flex-end;
       justify-content: center;
       padding: 0;
+      padding-bottom: 0;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
     }
@@ -102,10 +103,12 @@
       border-radius: 24px 24px 0 0;
       padding: 0 0 max(20px, env(safe-area-inset-bottom, 20px));
       animation: slideUp .3s cubic-bezier(.25,.8,.25,1);
-      max-height: 92dvh;
-      max-height: 92vh;
+      height: 96dvh;
+      height: 96vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
     }
 
     @keyframes slideUp {
@@ -127,12 +130,16 @@
       width: 100%;
       background: #000;
       position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      min-height: 0;
     }
 
     .modal-video {
       width: 100%;
+      height: 100%;
       display: block;
-      max-height: 56vw;       /* 16:9-ish on phones */
       object-fit: contain;
       background: #000;
     }
@@ -236,17 +243,9 @@
 
       .modal-container {
         border-radius: 20px;
-        max-height: 88dvh;
-        max-height: 88vh;
+        height: 94dvh;
+        height: 94vh;
         max-width: 600px;
-      }
-
-      .modal-video {
-        max-height: 38vh;
-      }
-
-      .direction-gif {
-        max-height: 80px;
       }
     }
   </style>
