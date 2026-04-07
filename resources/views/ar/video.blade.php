@@ -378,14 +378,14 @@
     };
 
     const targetDirections = {
-      0:  "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}",
-      1:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      2:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      3:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      4:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      5:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      6:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
-      7:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      0:  "{{ asset('aframe/examples/assets/murales/gifs/1-2.gif') }}",
+      1:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      2:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      3:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      4:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      5:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      6:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
+      7:  "{{ asset('aframe/examples/assets/murales/gifs/3.gif') }}",
       8:  "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
       9:  "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
       10: "{{ asset('aframe/examples/assets/murales/gifs/3-4-5-6-7.gif') }}",
@@ -403,13 +403,13 @@
       22: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
       23: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
       24: "{{ asset('aframe/examples/assets/murales/gifs/9-10.gif') }}",
-      25: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
-      26: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
-      27: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
-      28: "{{ asset('aframe/examples/assets/murales/gifs/10-11.gif') }}",
+      25: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}",
+      26: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}",
+      27: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}",
+      28: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}",
       29: "{{ asset('aframe/examples/assets/murales/gifs/11-12.gif') }}",
       30: "{{ asset('aframe/examples/assets/murales/gifs/11-12.gif') }}",
-      31: "{{ asset('aframe/examples/assets/murales/gifs/12-13.gif') }}"
+      31: "{{ asset('aframe/examples/assets/murales/gifs/1.gif') }}"
     };
 
     document.addEventListener("DOMContentLoaded", () => {
