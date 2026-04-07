@@ -233,7 +233,7 @@
     <!-- Texto introductorio -->
     <div style="max-width:380px; margin-bottom:28px; text-align:justify;">
       <p style="font-size:.875rem; line-height:1.65; color:#4a4a4a;">
-        Reúne una selección emblemática de la obra de Leopoldo Flores, creador fundamental del arte mexicano contemporáneo y figura imprescindible en la vida cultural del Estado de México. Su producción artística, profundamente humanista, interpela al espectador desde una mirada crítica y reflexiva sobre el ser humano, su tiempo y su entorno.
+        El hombre contemplando al hombre reúne una selección emblemática de la obra de Leopoldo Flores, creador fundamental del arte mexicano contemporáneo y figura imprescindible en la vida cultural del Estado de México. Su producción artística, profundamente humanista, interpela al espectador desde una mirada crítica y reflexiva sobre el ser humano, su tiempo y su entorno.
       </p>
       <p style="font-size:.875rem; line-height:1.65; color:#4a4a4a; margin-top:10px;">
         Más allá de lo formal, la obra de Flores se erige como testimonio de una defensa constante del arte público, de la cultura como derecho y de los espacios de creación como pilares del desarrollo social. En cada trazo, el artista convoca a una contemplación consciente: el hombre frente a sí mismo, frente a su historia y frente a la responsabilidad de construir comunidad, memoria y futuro.
