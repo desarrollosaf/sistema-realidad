@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <!-- Preload del .mind file: empieza a descargarse en cuanto el navegador lee este HTML -->
+  <link rel="preload" href="{{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}" as="fetch" crossorigin="anonymous">
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -456,12 +458,13 @@
 
       uniqueSrcs.forEach(src => {
         const v = document.createElement("video");
-        v.className        = "modal-video";
-        v.preload          = "auto";
-        v.playsinline      = true;
-        v.controls         = true;
+        v.className = "modal-video";
+        v.preload   = "auto";
+        v.controls  = true;
+        v.setAttribute("playsinline", "");
         v.setAttribute("webkit-playsinline", "");
-        v.src              = src;
+        v.setAttribute("x5-playsinline", "");
+        v.src = src;
         v.style.display    = "none";
         videoWrap.appendChild(v);
         videoCache[src] = v;

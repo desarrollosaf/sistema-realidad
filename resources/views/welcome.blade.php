@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Murales · Poder Legislativo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Precarga silenciosa de recursos AR mientras el usuario lee esta pantalla -->
+  <link rel="prefetch" href="https://aframe.io/releases/1.5.0/aframe.min.js" as="script">
+  <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js" as="script">
+  <link rel="prefetch" href="{{ asset('aframe/examples/assets/murales/muralesFF3.mind') }}" as="fetch" crossorigin="anonymous">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
