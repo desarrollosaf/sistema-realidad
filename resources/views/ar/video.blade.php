@@ -248,10 +248,46 @@
         max-width: 600px;
       }
     }
+
+    /* ── Loading overlay ─────────────────────────────────── */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0a0a0a;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      transition: opacity .5s ease;
+    }
+    #loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loading-logo { height: 52px; width: auto; opacity: .85; }
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid rgba(255,255,255,.15);
+      border-top-color: #94134A;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: rgba(255,255,255,.55); font-size: .82rem; letter-spacing: .04em; }
   </style>
 </head>
 
 <body>
+
+  <!-- Loading screen -->
+  <div id="loading-overlay">
+    <img class="loading-logo" src="{{ asset('images/congreso.png') }}" alt="Congreso">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Iniciando cámara…</p>
+  </div>
 
   <div id="overlay">
     <button id="menuBtn" class="back-btn" type="button" aria-label="Regresar">
@@ -311,16 +347,7 @@
     <div class="modal-container">
       <div class="modal-handle"></div>
 
-      <div class="modal-video-wrap">
-        <video
-          id="modalVideo"
-          class="modal-video"
-          playsinline
-          webkit-playsinline
-          controls
-          preload="auto"
-        ></video>
-      </div>
+      <div class="modal-video-wrap" id="videoWrap"></div>
 
       <div class="route-section">
         <div class="route-label">¿Hacia dónde ir?</div>
@@ -413,14 +440,42 @@
     };
 
     document.addEventListener("DOMContentLoaded", () => {
-      const modal      = document.getElementById("customModal");
-      const modalVideo = document.getElementById("modalVideo");
-      const dirGif     = document.getElementById("directionGif");
-      const menuBtn    = document.getElementById("menuBtn");
+      const modal    = document.getElementById("customModal");
+      const videoWrap = document.getElementById("videoWrap");
+      const dirGif   = document.getElementById("directionGif");
+      const menuBtn  = document.getElementById("menuBtn");
+      const loadingOverlay = document.getElementById("loading-overlay");
 
-      let currentIdx  = null;
-      let modalOpen   = false;
-      let cooldown    = false;
+      let currentIdx = null;
+      let modalOpen  = false;
+      let cooldown   = false;
+
+      /* ── Pre-buffer one <video> per unique src ── */
+      const videoCache = {};
+      const uniqueSrcs = [...new Set(Object.values(targetVideos))];
+
+      uniqueSrcs.forEach(src => {
+        const v = document.createElement("video");
+        v.className        = "modal-video";
+        v.preload          = "auto";
+        v.playsinline      = true;
+        v.controls         = true;
+        v.setAttribute("webkit-playsinline", "");
+        v.src              = src;
+        v.style.display    = "none";
+        videoWrap.appendChild(v);
+        videoCache[src] = v;
+      });
+
+      /* ── Hide loading overlay when MindAR is ready ── */
+      const scene = document.querySelector("a-scene");
+      const hideLoading = () => {
+        loadingOverlay.classList.add("fade-out");
+        setTimeout(() => loadingOverlay.remove(), 500);
+      };
+      scene.addEventListener("arReady", hideLoading);
+      /* Fallback: si arReady no dispara en 15 s, quitamos el overlay igual */
+      setTimeout(hideLoading, 15000);
 
       /* ── Listen for AR target events ── */
       document.querySelectorAll("[mindar-image-target]").forEach((el) => {
@@ -445,21 +500,25 @@
         const videoSrc = targetVideos[idx];
         const gifSrc   = targetDirections[idx] || targetDirections[0];
 
+        /* Ocultar todos los videos pre-cargados */
+        Object.values(videoCache).forEach(v => {
+          v.pause();
+          v.style.display = "none";
+        });
+
         dirGif.src = gifSrc;
         modal.classList.remove("hidden");
 
-        if (videoSrc) {
-          modalVideo.pause();
-          modalVideo.src = videoSrc;
-          modalVideo.currentTime = 0;
-          modalVideo.muted = false;
-          modalVideo.load();
-
-          const p = modalVideo.play();
+        const v = videoCache[videoSrc];
+        if (v) {
+          v.style.display = "block";
+          v.currentTime   = 0;
+          v.muted         = false;
+          const p = v.play();
           if (p !== undefined) {
             p.catch(() => {
-              modalVideo.muted = true;
-              modalVideo.play().catch(() => {});
+              v.muted = true;
+              v.play().catch(() => {});
             });
           }
         }
@@ -469,9 +528,10 @@
 
       window.closeModal = function () {
         modal.classList.add("hidden");
-        modalVideo.pause();
-        modalVideo.removeAttribute("src");
-        modalVideo.load();
+        Object.values(videoCache).forEach(v => {
+          v.pause();
+          v.style.display = "none";
+        });
         currentIdx = null;
         modalOpen  = false;
       };
