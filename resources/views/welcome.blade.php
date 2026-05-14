@@ -284,5 +284,59 @@
 
 </div>
 
+
+<!-- Contador de visitas flotante -->
+<div id="visit-counter" style="
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 50px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(148,19,74,.35);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .4s ease;
+  user-select: none;
+">
+  <span style="
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.22);
+    border-radius:50%;
+    width:26px; height:26px;
+    flex-shrink:0;
+  ">
+    <i class="fa-solid fa-eye" style="font-size:.9rem;"></i>
+  </span>
+  <span id="visit-count">…</span> visitas
+</div>
+
+<script>
+(function () {
+  fetch('{{ route('visitas.registrar') }}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({ ruta: '/' })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('visit-count').textContent = data.contador.toLocaleString();
+    document.getElementById('visit-counter').style.opacity = '1';
+  })
+  .catch(() => {
+    document.getElementById('visit-counter').style.display = 'none';
+  });
+})();
+</script>
+
 </body>
 </html>
